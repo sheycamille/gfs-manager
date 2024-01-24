@@ -140,6 +140,9 @@ use App\Http\Controllers\ProjectExpenseController;
 use App\Http\Controllers\NepalstePaymnetController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ShipmentController;
+
+use App\Http\Controllers\Updates\GeneralUpdatesController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -175,7 +178,9 @@ Route::get('/register', function () {
     return Redirect::to('login');
 });
 
-Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
+Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware('guest');
+
+// Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
 // Route::get('/password/resets/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('change.langPass');
 // Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
