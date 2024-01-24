@@ -34,7 +34,7 @@
     <div class="flex flex-col-reverse md:flex-row md:justify-between md:h-screen">
         <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full flex justify-center items-center">
             <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] text-center">
-                <img src="/images/gsf logo.png" alt="">
+                <img src="{{asset('/images/gsf logo.png')}}" alt="">
                 <div class="my-5 text-center">
                     <h1 class="gtext-primary font-bold text-4xl">Welcome to <br /> GFS Manager</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
@@ -65,7 +65,7 @@
             </div>
 
             <div id="slide2" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] hide text-center">
-                <img src="/images/slide2.png" class="max-h-[300px]" alt="">
+                <img src="{{asset('/images/slide2.png')}}" class="max-h-[300px]" alt="">
                 <div class="my-5 text-center">
                     <h1 class="gtext-primary font-bold text-4xl">Need help <br /> using our site?</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
@@ -96,7 +96,7 @@
             </div>
 
             <div id="slide3" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] hide text-center">
-                <img src="/images/slide3.jpeg" alt="">
+                <img src="{{asset('/images/slide2.png')}}" alt="">
                 <div class="my-5 text-center">
                     <h1 class="gtext-primary font-bold text-4xl">First time <br /> using this?</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
