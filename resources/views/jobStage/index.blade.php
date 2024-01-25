@@ -52,10 +52,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-3">
+        <div class="col-12 col-md-3">
             @include('layouts.hrm_setup')
         </div>
-        <div class="col-9">
+        <div class="col-12 col-md-9">
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content tab-bordered">

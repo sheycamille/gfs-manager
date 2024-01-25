@@ -18405,7 +18405,7 @@ body:not(.minimenu) .dash-sidebar .dash-submenu .dash-submenu .dash-submenu > .d
 
 @media (max-width: 1024px) {
     .dash-sidebar {
-        left: -255px;
+        left: -300px;
         box-shadow: none;
         transition: all 0.15s ease-in-out;
     }
