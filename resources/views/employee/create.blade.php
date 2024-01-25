@@ -19,7 +19,7 @@
 
             </div>
             {{ Form::open(['route' => ['employee.store'], 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
-            <div class="row">
+            <div class="row ms-md-4">
                 <div class="col-md-6">
                     <div class="card em-card">
                         <div class="card-header">
