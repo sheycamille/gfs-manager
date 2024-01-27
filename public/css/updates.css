@@ -44,6 +44,18 @@
 
 .mform-group input {
     display: block;
+    border-top: 0px transparent;
+    border-right: 0px transparent;
+    border-left: 0px transparent;
+    border-bottom: 1px solid #fff;
+}
+
+.mform-group input:focus, .mform-group input:focus{
+    outline: none;
+    border-top: 0px transparent;
+    border-right: 0px transparent;
+    border-left: 0px transparent;
+    border-bottom: 1px solid #fff;
 }
 
 .hr-lines{

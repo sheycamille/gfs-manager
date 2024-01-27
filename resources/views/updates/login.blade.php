@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login to your account</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="/css/updates.css">
     <style>
         .hide {
@@ -32,16 +32,16 @@
 
 <body class="auth-bg">
     <div class="flex flex-col-reverse md:flex-row md:justify-between md:h-screen">
-        <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full flex justify-center items-center">
-            <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] text-center">
-                <img src="/public/images/gsf logo.png" alt="">
+        <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full flex flex-col justify-center items-center">
+            <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] text-center relative">
+                <img src="/public/images/gsf logo.png" alt="" class="md:h-[35%] w-full">
                 <div class="my-5 text-center">
-                    <h1 class="gtext-primary font-bold text-4xl">Welcome to <br /> GFS Manager</h1>
+                    <h1 class="text-primary font-bold text-6xl">Welcome to <br /> GFS Manager</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
                         (LIMS) ERP</p>
                 </div>
 
-                <div class="w-full flex justify-center space-x-2">
+                <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
                     <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
@@ -64,15 +64,17 @@
                 </div>
             </div>
 
-            <div id="slide2" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] hide text-center">
-                <img src="/public/images/slide2.png" class="max-h-[300px]" alt="">
+            <div id="slide2" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] hide text-center relative">
+                <div class="w-full md:h-[40%] text-center md:flex md:justify-center">
+                    <img src="/public/images/slide2.png" class="md:h-full md:w-[50%]" alt="">
+                </div>
                 <div class="my-5 text-center">
-                    <h1 class="gtext-primary font-bold text-4xl">Need help <br /> using our site?</h1>
+                    <h1 class="text-primary font-bold text-6xl">Need help <br /> using our site?</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
                         (LIMS) ERP</p>
                 </div>
 
-                <div class="w-full flex justify-center space-x-2">
+                <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
                             fill="none">
                             <path
@@ -95,38 +97,43 @@
                 </div>
             </div>
 
-            <div id="slide3" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] hide text-center">
-                <img src="/public/images/slide2.png" alt="">
-                <div class="my-5 text-center">
-                    <h1 class="gtext-primary font-bold text-4xl">First time <br /> using this?</h1>
-                    <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
-                        (LIMS) ERP</p>
+            <div id="slide3" class="bg-white rounded-3xl shadow-lg md:w-[80%] md:h-[70%] hide relative">
+                <div class="h-[40%] w-full rounded-t-3xl py-10" style="background: url('/public/images/slide3.jpeg');background-size: cover;background-repeat: no-repeat;background-position: center;">
                 </div>
-
-                <div class="w-full flex justify-center space-x-2">
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-
-                    <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
-                        </svg>
-                    </span>
+                <div class="px-5 text-center">
+                    <div class="my-5 text-center">
+                        <h1 class="text-primary font-bold text-6xl">First time <br /> using this?</h1>
+                        <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
+                            (LIMS) ERP</p>
+                    </div>
+    
+                    <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
+                                fill="none">
+                                <path
+                                    d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
+                                    fill="#F47827" fill-opacity="0.4" />
+                            </svg></span>
+    
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
+                                fill="none">
+                                <path
+                                    d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
+                                    fill="#F47827" fill-opacity="0.4" />
+                            </svg></span>
+    
+                        <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
             </div>
+            
+            <p class="text-center text-primary mt-10">@copyright {{ date('Y') }}</p>
         </div>
-        <div class="w-full md:w-1/2 gbg-primary h-full flex flex-col">
+        <div class="w-full md:w-1/2 bg-primary h-full flex flex-col">
             <nav class="bg-white shadow-lg w-full py-3 flex justify-between items-center px-4">
                 <div class="flex space-x-4 items-center text-[#181A20]">
                     <a href="#" class="gnav-link">About US</a>
@@ -163,9 +170,9 @@
                     class="w-[60%] mt-10">
                     @csrf
                     <div class="mform-group w-full">
-                        <label for="">Username</label>
+                        <label for="" class="text-white">Username</label>
                         <input type="text" name="email_or_phone" placeholder="Email address / Phone number"
-                            class="mt-5 w-full bg-transparent text-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
+                            class="mt-5 w-full bg-transparent text-white placeholder-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
                         @error('email_or_phone')
                             <span class="text-red-500" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -176,7 +183,7 @@
                     <div class="mform-group w-full mt-5">
                         <label for="">Password</label>
                         <input type="password" name="password" placeholder="Enter your password"
-                            class="mt-5 w-full bg-transparent text-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
+                            class="mt-5 w-full bg-transparent text-white placeholder-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
                         @error('password')
                             <span class="error text-red-500 invalid-password text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -225,7 +232,6 @@
         }
     }
 
-    // Set interval to toggle slides every 10 seconds
     setInterval(toggleSlides, 5000);
 
     $(document).ready(function() {
