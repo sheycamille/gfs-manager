@@ -26,7 +26,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "."
-        target: "var/www/html/gfsmanager"
+        target: "/var/www/html/gfsmanager"
 
   build_project:
     name: Build

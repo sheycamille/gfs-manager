@@ -38,7 +38,7 @@
             <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] text-center relative">
                 <img src="/public/images/gsf logo.png" alt="" class="md:h-[35%] w-full">
                 <div class="my-5 text-center">
-                    <h1 class="text-primary font-bold text-6xl">Welcome to <br /> GFS Manager</h1>
+                    <h1 class="text-primary font-bold text-6xl">Welcome To <br /> GFS Manager</h1>
                     <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
                         (LIMS) ERP</p>
                 </div>
