@@ -8,6 +8,8 @@
     <title>Login to your account</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="/css/updates.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.js" integrity="sha512-8IPRU0MPrge2KfSxkAtO8pIkaMzThW/MBSvPqcyVisSymLWC986buo27pKAt5mWXmt58dT6jIsw7h8NNugtRwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .hide {
             display: none;
@@ -32,7 +34,7 @@
 
 <body class="auth-bg">
     <div class="flex flex-col-reverse md:flex-row md:justify-between md:h-screen">
-        <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full flex flex-col justify-center items-center">
+        <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full hidden md:flex flex-col justify-center items-center">
             <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] text-center relative">
                 <img src="/public/images/gsf logo.png" alt="" class="md:h-[35%] w-full">
                 <div class="my-5 text-center">
@@ -133,12 +135,20 @@
             
             <p class="text-center text-primary mt-10">@copyright {{ date('Y') }}</p>
         </div>
-        <div class="w-full md:w-1/2 bg-primary h-full flex flex-col">
-            <nav class="bg-white shadow-lg w-full py-3 flex justify-between items-center px-4">
-                <div class="flex space-x-4 items-center text-[#181A20]">
+        <div class="w-full md:w-1/2 bg-primary h-screen md:h-full flex flex-col">
+            <nav x-data="{ open: false }" :class="{'items-start': open, 'items-center': !open}" class="bg-white shadow-lg w-full py-3 flex justify-between px-4">
+                <div class="hidden md:flex space-x-4 items-center text-[#181A20]">
                     <a href="#" class="gnav-link">About US</a>
                     <a href="#" class="gnav-link">How to use</a>
                     <a href="#" class="gnav-link">Privacy policy</a>
+                </div>
+                <div class="md:hidden">
+                    <button @click="open = !open"><i class="fa-solid fa-bars"></i></button>
+                    <div x-show="open" class="md:hidden">
+                        <a href="#" class="block py-2">About US</a>
+                        <a href="#" class="block py-2">How to use</a>
+                        <a href="#" class="block py-2">Privacy policy</a>
+                    </div>
                 </div>
                 <div class="flex space-x-4 items-center gtext-secondary">
                     <button class="auth-icon-bg p-2">
