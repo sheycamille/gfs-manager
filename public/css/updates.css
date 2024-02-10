@@ -20,7 +20,7 @@
 
 .auth-icon-bg {
     border-radius: 10px;
-    background: var(--grey-100, #F5F5F5);
+    background: #F5F5F5;
 }
 
 .gnav-link {

@@ -10,6 +10,10 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/nlogin', function(){
+    return view('updates.nlogin');
+});
+
 Route::get('/register', [RegisteredUserController::class, 'showRegistrationForm'])
                 ->middleware('guest')
                 ->name('register');
