@@ -2,254 +2,263 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon" />
+    <link href="./output.css" rel="stylesheet" />
+    <link href="./input.css" rel="stylesheet" />
     <title>Login to your account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="./login.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="/css/updates.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.js" integrity="sha512-8IPRU0MPrge2KfSxkAtO8pIkaMzThW/MBSvPqcyVisSymLWC986buo27pKAt5mWXmt58dT6jIsw7h8NNugtRwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        .hide {
-            display: none;
-            animation: fadeInOut 0.5s ease;
-        }
-
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 
-<body class="auth-bg">
-    <div class="flex flex-col-reverse md:flex-row md:justify-between md:h-screen">
-        <div id="first-div" class="w-full mt-10 md:mt-0 md:w-1/2 h-full hidden md:flex flex-col justify-center items-center">
-            <div id="slide1" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] text-center relative">
-                <img src="/public/images/gsf logo.png" alt="" class="md:h-[35%] w-full">
-                <div class="my-5 text-center">
-                    <h1 class="text-primary font-bold text-6xl">Welcome To <br /> GFS Manager</h1>
-                    <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
-                        (LIMS) ERP</p>
+<body class="bg-gray-200">
+    <div class="lg:flex min-h-screen bg-white">
+        <!-- ====slider for larger screens==== -->
+        <div class="h-[400px] md:h-full lg:block lg:w-1/2 relative overflow-hidden">
+            <nav class="md:hidden py-1 px-3 flex justify-between">
+              <a href="/">
+                <img src="./assets/logo.png" alt="logo" class="w-20" />
+              </a>
+              <div class="flex space-x-2">
+                <div class="flex">
+                  <button id="lang-button" data-dropdown-toggle="dropdown-lang"
+                      class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm text-center text-primary"
+                      type="button">
+                      <img src="./assets/us.png" class="h-5 w-5 mr-4" />
+                      Eng
+                      <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                          fill="none" viewBox="0 0 10 6">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2" d="m1 1 4 4 4-4" />
+                      </svg>
+                  </button>
+                  <div id="dropdown-lang"
+                      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-20">
+                      <ul class="py-2 text-sm text-gray-700" aria-labelledby="states-button">
+                          <li>
+                              <button type="button"
+                                  class="inline-flex w-full px-4 py-2 text-sm hover:bg-gray-100">
+                                  <div class="inline-flex items-center">English</div>
+                              </button>
+                          </li>
+                          <li>
+                              <button type="button"
+                                  class="inline-flex w-full px-4 py-2 text-sm hover:bg-gray-100">
+                                  <div class="inline-flex items-center">French</div>
+                              </button>
+                          </li>
+                      </ul>
+                  </div>
                 </div>
-
-                <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
-                    <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
-                        </svg>
-                    </span>
-
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-                </div>
-            </div>
-
-            <div id="slide2" class="bg-white py-10 px-5 rounded-3xl shadow-lg md:w-[80%] md:h-[70%] hide text-center relative">
-                <div class="w-full md:h-[40%] text-center md:flex md:justify-center">
-                    <img src="/public/images/slide2.png" class="md:h-full md:w-[50%]" alt="">
-                </div>
-                <div class="my-5 text-center">
-                    <h1 class="text-primary font-bold text-6xl">Need help <br /> using our site?</h1>
-                    <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
-                        (LIMS) ERP</p>
-                </div>
-
-                <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-
-                    <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
-                        </svg>
-                    </span>
-
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                            fill="none">
-                            <path
-                                d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                fill="#F47827" fill-opacity="0.4" />
-                        </svg></span>
-                </div>
-            </div>
-
-            <div id="slide3" class="bg-white rounded-3xl shadow-lg md:w-[80%] md:h-[70%] hide relative">
-                <div class="h-[40%] w-full rounded-t-3xl py-10" style="background: url('/public/images/slide3.jpeg');background-size: cover;background-repeat: no-repeat;background-position: center;">
-                </div>
-                <div class="px-5 text-center">
-                    <div class="my-5 text-center">
-                        <h1 class="text-primary font-bold text-6xl">First time <br /> using this?</h1>
-                        <p class="mt-5 gtext-secondary font-bold text-xl">Your Logistic Information Management <br />System
-                            (LIMS) ERP</p>
-                    </div>
-    
-                    <div class="w-full flex justify-center space-x-2 absolute bottom-0 pb-5">
-                        <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                                fill="none">
-                                <path
-                                    d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                    fill="#F47827" fill-opacity="0.4" />
-                            </svg></span>
-    
-                        <span><svg xmlns="http://www.w3.org/2000/svg" width="48" height="8" viewBox="0 0 48 8"
-                                fill="none">
-                                <path
-                                    d="M0.210632 3.95598C0.210632 1.77115 1.98178 0 4.16661 0H43.7264C45.9112 0 47.6824 1.77115 47.6824 3.95598C47.6824 6.1408 45.9112 7.91195 43.7264 7.91195H4.16661C1.98179 7.91195 0.210632 6.1408 0.210632 3.95598Z"
-                                    fill="#F47827" fill-opacity="0.4" />
-                            </svg></span>
-    
-                        <span class="font-bold mbg-secondary"><svg width="92" height="8" viewBox="0 0 92 8"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.210632" width="90.9875" height="7.91195" rx="3.95598" fill="#F47827" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <p class="text-center text-primary mt-10">@copyright {{ date('Y') }}</p>
-        </div>
-        <div class="w-full md:w-1/2 bg-primary h-screen md:h-full flex flex-col">
-            <nav x-data="{ open: false }" :class="{'items-start': open, 'items-center': !open}" class="bg-white shadow-lg w-full py-3 flex justify-between px-4">
-                <div class="hidden md:flex space-x-4 items-center text-[#181A20]">
-                    <a href="#" class="gnav-link">About US</a>
-                    <a href="#" class="gnav-link">How to use</a>
-                    <a href="#" class="gnav-link">Privacy policy</a>
-                </div>
-                <div class="md:hidden">
-                    <button @click="open = !open"><i class="fa-solid fa-bars"></i></button>
-                    <div x-show="open" class="md:hidden">
-                        <a href="#" class="block py-2">About US</a>
-                        <a href="#" class="block py-2">How to use</a>
-                        <a href="#" class="block py-2">Privacy policy</a>
-                    </div>
-                </div>
-                <div class="flex space-x-4 items-center gtext-secondary">
-                    <button class="auth-icon-bg p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                                d="M15.5 14H14.71L14.43 13.73C15.055 13.004 15.5117 12.1488 15.7676 11.2256C16.0234 10.3025 16.0721 9.33417 15.91 8.39002C15.44 5.61002 13.12 3.39002 10.32 3.05002C6.09002 2.53002 2.54002 6.09001 3.05002 10.32C3.39002 13.12 5.61002 15.44 8.39002 15.91C9.33417 16.0721 10.3025 16.0234 11.2256 15.7676C12.1488 15.5117 13.004 15.055 13.73 14.43L14 14.71V15.5L18.26 19.75C18.67 20.16 19.33 20.16 19.74 19.75L19.75 19.74C20.16 19.33 20.16 18.67 19.75 18.26L15.5 14ZM9.50002 14C7.01002 14 5.00002 11.99 5.00002 9.50002C5.00002 7.01002 7.01002 5.00002 9.50002 5.00002C11.99 5.00002 14 7.01002 14 9.50002C14 11.99 11.99 14 9.50002 14ZM9.50002 7.00002C9.22002 7.00002 9.00002 7.22002 9.00002 7.50002V9.00002H7.50002C7.22002 9.00002 7.00002 9.22002 7.00002 9.50002C7.00002 9.78002 7.22002 10 7.50002 10H9.00002V11.5C9.00002 11.78 9.22002 12 9.50002 12C9.78002 12 10 11.78 10 11.5V10H11.5C11.78 10 12 9.78002 12 9.50002C12 9.22002 11.78 9.00002 11.5 9.00002H10V7.50002C10 7.22002 9.78002 7.00002 9.50002 7.00002Z"
-                                fill="#F47827" />
-                        </svg>
-                    </button>
-                    <div class="flex items-center auth-icon-bg p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16"
-                            fill="none">
-                            <path
-                                d="M7.725 4.25L7.975 5.5H11.25V9.25H9.15L8.9 8H4.375V4.25H7.725ZM8.75 3H3.125V13.625H4.375V9.25H7.875L8.125 10.5H12.5V4.25H9L8.75 3Z"
-                                fill="#F47827" />
-                        </svg>
-                        <select name="" id="" class="gtext-secondary border-none">
-                            <option value="english">
-                                English
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <button class="text-primary">
+                  <i class="fa-solid fa-bars"></i>
+                </button>
+              </div>
             </nav>
-            <div class="flex flex-col py-10 md:py-0 justify-center items-center flex-1">
-                <h1 class="text-white font-bold underline text-center text-4xl">Login</h1>
-                <form id="form_data" action="{{ route('login') }}" method="POST" id="form_data"
-                    class="w-[60%] mt-10">
-                    @csrf
-                    <div class="mform-group w-full">
-                        <label for="" class="text-white">Username</label>
-                        <input type="text" name="email_or_phone" placeholder="Email address / Phone number"
-                            class="mt-5 w-full bg-transparent text-white placeholder-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
-                        @error('email_or_phone')
-                            <span class="text-red-500" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+            <!-- Wrapper -->
+            <div class="min-h-full slides flex justify-center items-center transition-transform duration-500 ease-in-out px-10"
+                id="sliderWrapper">
+                <!-- First large screen slide -->
+                <div id="slide1" class="flex-shrink-0 px-3">
+                    <div class="flex flex-col justify-center items-center py-10">
+                        <div class="w-2/4 md:w-4/5">
+                            <img src="./assets/logo.png" alt="" class="py-5 px-20 w-full" />
+                        </div>
+                        <p class="text-blue-500 font-bold md:mt-5 md:text-5xl text-center">
+                            Welcome <br />
+                            to <br />
+                            GFS Manager
+                        </p>
+                        <div class="text-orange-500 text-center text-lg font-semibold md:px-2 md:p-5 md:mt-16">
+                            Your Logistic Information Management System <br />
+                            (LIMS) ERP
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mform-group w-full mt-5">
-                        <label for="">Password</label>
-                        <input type="password" name="password" placeholder="Enter your password"
-                            class="mt-5 w-full bg-transparent text-white placeholder-white pb-2 border-b-2 border-b-white focus:ring-0 focus:ring-offset-0 outline-none">
-                        @error('password')
-                            <span class="error text-red-500 invalid-password text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                <!-- Second large screen slide -->
+                <div id="slide2" class="hidden relative h-full">
+                    <div class="slide-content">
+                        <div class="rounded-lg w-full md:my-8">
+                            <img src="./assets/slide2.png" alt="" class="px-10 w-full md:h-[80%s] object-cover" />
+                        </div>
+
+                        <button class="text-orange-500 bg-white rounded px-5 py-3 top-8 left-5 flex absolute"
+                            onclick="showSlide(activeSlide > 1 ? activeSlide - 1 : slideCount)">
+                            <img src="./assets/back.png" class="mt-1" alt="" />
+                            <p class="text-sm font-semibold mx-1">Back</p>
+                        </button>
                     </div>
+                </div>
 
-                    <a href="#" class="text-white block my-3">Forgot Password?</a>
+                <!-- Third large screen slide -->
+                <div id="slide3" class="hidden flex-shrink-0 mx-5">
+                    <button class="text-orange-500 bg-white rounded px-5 py-3 flex"
+                        onclick="showSlide(activeSlide > 1 ? activeSlide - 1 : slideCount)">
+                        <img src="./assets/back.png" class="mt-1" alt="" />
+                        <p class="text-sm font-semibold mx-1">Back</p>
+                    </button>
+                    <div class="flex flex-col justify-center">
+                        <iframe class="md:w-[550px]" height="500" class="mx-auto mt-16" x-ref="player"
+                            src="https://www.youtube.com/embed/CgCPP2KO5ds?si=FBOEKbNDLPzrd2-N"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                        <a href="" class="text-gray-500 text-xs p-5 ml-24">Don't know how to use this app?</a>
+                        <div class="my-5 flex justify-center">
+                            <a href="" class="py-3 px-12 mr-2 rounded-lg bg-orange-500 text-xs text-white">
+                                User Documentation guide
+                            </a>
+                            <a href=""
+                                class="border border-orange-500 py-3 px-12 rounded-lg text-xs text-orange-500">
+                                Technical assistant
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <input type="submit" value="Submit" id="login_button"
-                        class="gtext-secondary my-5 bg-white py-4 w-full text-center rounded-lg">
+            <!-- Slider indicators -->
+            <div class="absolute bottom-5 left-0 right-0 flex justify-center space-x-2 p-4" id="sliderIndicators">
+                <button onclick="showSlide(1)" class="h-1 rounded-full bg-orange-500 w-12"></button>
+                <button onclick="showSlide(2)" class="h-1 rounded-full bg-gray-300 w-3"></button>
+                <button onclick="showSlide(3)" class="h-1 rounded-full bg-gray-300 w-3"></button>
+            </div>
+        </div>
 
-                    {{-- <h2 class="hr-lines my-5 text-white">Or you can login with</h2>
+        <!-- =======Form for larger screens====== -->
+        <div class="form p-8 w-full lg:w-1/2 flex flex-col justify-between text-white bg-primary min-h-screen">
+            <div class="">
+                <div class="hidden md:flex justify-between font-semibold text-xs">
+                    <div class="flex">
+                        <a href="#">About</a>
+                        <span class="mx-1">|</span>
+                        <a href="#">How to use</a>
+                    </div>
+                    <!-- ======Language Selector===== -->
+                    <div class="flex">
+                        <button id="lang-button" data-dropdown-toggle="dropdown-lang"
+                            class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm text-center text-white"
+                            type="button">
+                            <img src="./assets/us.png" class="h-5 w-5" />
+                            Eng
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div id="dropdown-lang"
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-20">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="states-button">
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 text-sm hover:bg-gray-100">
+                                        <div class="inline-flex items-center">English</div>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 text-sm hover:bg-gray-100">
+                                        <div class="inline-flex items-center">French</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sm:pt-24 md:mt-36 md:pt-0 md:p-24 w-full">
+                    <h2 class="text-3xl font-semibold text-white text-center mt-5">
+                        Login
+                    </h2>
+                    <p class="text-white text-center my-5">
+                        Enter your email and password to sign in!
+                    </p>
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
+                        <div class="mt-8">
+                            <label class="block text-xs mb-2">Login*</label>
+                            <input
+                                name="email_or_phone"
+                                class="text-xs focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
+                                type="email" placeholder="Login, Email or phone number" required />
+                                @error('email_or_phone')
+                                    <span class="text-red-500" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+                        <div class="mt-4 w-full">
+                            <label class="block text-xs mb-2">Password*</label>
+                            <div class="relative">
+                                <input id="password"
+                                    name="password"
+                                    class="text-xs text-black focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
+                                    type="password" placeholder="Enter password" />
+                                <button onclick="togglePasswordVisibility()"
+                                    class="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                                    <i id="passwordVisibilityIcon" class="fa-solid fa-eye-slash"></i>
+                                </button>
+                                @error('password')
+                                    <span class="error text-red-500 invalid-password text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <div class="gtext-secondary my-5 bg-white py-4 w-full text-center rounded-lg flex justify-center">
-                        <a href="#"></a>
-                    </div> --}}
-                </form>
+                        <div class="flex justify-between my-3">
+                            <div class="flex">
+                                <input type="checkbox" name="remember_me" checked />
+                                <p class="text-white text-xs mx-2">Keep me logged in</p>
+                            </div>
+                            <a href="#" class="text-xs">Forgot password?</a>
+                        </div>
+                        <div class="mt-8">
+                            <button
+                                class="bg-orange-500 text-white text-sm py-2 px-4 w-full rounded-lg hover:bg-orange-300">
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-8 flex items-center justify-between">
+                        <span class="border-b w-1/2 md:w-2/5"></span>
+                        <a href="#" class="text-xs text-white">or Login with</a>
+                        <span class="border-b w-1/2 md:w-2/5"></span>
+                    </div>
+                    <div class="flex flex-col md:flex-row justify-around mt-3 space-y-5 md:space-y-0 md:space-x-2">
+                        <button class="border border-white py-2 px-16 rounded-lg hover:border-orange-500">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </button>
+                        <button class="border border-white py-2 px-16 rounded-lg hover:border-orange-500">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </button>
+                        <button class="border border-white py-2 px-16 rounded-lg hover:border-orange-500">
+                            <i class="fa-brands fa-google"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-auto p-5">
+                <div class="flex w-full justify-center">
+                    <a href="#" class="text-xs mt-1">Terms</a>
+                    <span class="mx-1">|</span>
+                    <a href="#" class="text-xs mt-1">Privacy</a>
+                    <span class="mx-1">|</span>
+                    <a href="#" class="text-xs mt-1">Status</a>
+                    <span class="mx-1">|</span>
+                    <a href="#" class="text-xs mt-1">Data</a>
+                </div>
+                <p class="text-xs text-center mt-2">@2024 LIMS. ALl Rights Reserved</p>
             </div>
         </div>
     </div>
 </body>
 
 </html>
-
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-
-<script>
-    let slide1 = $('#slide1');
-    let slide2 = $('#slide2')
-    let slide3 = $('#slide3')
-
-    function toggleSlides() {
-        if (slide1.hasClass('hide') && !slide3.hasClass('hide')) {
-            slide1.removeClass('hide');
-            slide2.addClass('hide');
-            slide3.addClass('hide');
-        } else if (slide2.hasClass('hide')) {
-            slide1.addClass('hide');
-            slide2.removeClass('hide');
-            slide3.addClass('hide');
-        } else {
-            slide1.addClass('hide');
-            slide2.addClass('hide');
-            slide3.removeClass('hide');
-        }
-    }
-
-    setInterval(toggleSlides, 5000);
-
-    $(document).ready(function() {
-        $("#form_data").submit(function(e) {
-            $("#login_button").attr("disabled", true);
-            return true;
-        });
-    });
-</script>
-
-<!--
