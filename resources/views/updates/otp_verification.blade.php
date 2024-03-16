@@ -8,7 +8,7 @@
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon" />
     <link href="./output.css" rel="stylesheet" />
     <link href="./input.css" rel="stylesheet" />
-    <title>Login to your account</title>
+    <title>OTP Verification</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -178,48 +178,26 @@
                         Login
                     </h2>
                     <p class="text-white text-center my-5">
-                        Enter your email and password to sign in!
+                        Enter OTP code to proceed to login
                     </p>
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mt-8">
-                            <label class="block text-xs mb-2">Login*</label>
+                            @if(Session::has('message'))
+                                <p>{{ Session::get('messsage' )}}</p>
+                            @endif
+                            <label class="block text-xs mb-2">OTP CODE</label>
                             <input
-                                name="email_or_phone"
-                                class="text-xs text-black focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
-                                type="email" placeholder="Login, Email or phone number" required />
-                                @error('email_or_phone')
+                                name="otp_code"
+                                class="text-xs focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
+                                type="number" placeholder="xxxxxx" required />
+                                @error('otp_code')
                                     <span class="text-red-500" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                         </div>
-                        <div class="mt-4 w-full">
-                            <label class="block text-xs mb-2">Password*</label>
-                            <div class="relative">
-                                <input id="password"
-                                    name="password"
-                                    class="text-xs text-black focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
-                                    type="password" placeholder="Enter password" />
-                                <button onclick="togglePasswordVisibility()"
-                                    class="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700 focus:outline-none">
-                                    <i id="passwordVisibilityIcon" class="fa-solid fa-eye-slash"></i>
-                                </button>
-                                @error('password')
-                                    <span class="error text-red-500 invalid-password text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between my-3">
-                            <div class="flex">
-                                <input type="checkbox" name="remember" />
-                                <p class="text-white text-xs mx-2">Keep me logged in</p>
-                            </div>
-                            <a href="#" class="text-xs">Forgot password?</a>
-                        </div>
+                
                         <div class="mt-8">
                             <button
                                 class="bg-orange-500 text-white text-sm py-2 px-4 w-full rounded-lg hover:bg-orange-300">

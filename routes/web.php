@@ -179,6 +179,7 @@ Route::get('/register', function () {
 });
 
 Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVerification'])->name('otp-verification')->middleware('auth');
 
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 

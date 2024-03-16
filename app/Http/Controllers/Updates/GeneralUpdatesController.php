@@ -20,4 +20,17 @@ class GeneralUpdatesController extends Controller
 
         return view('updates.login', compact('lang','settings'));
     }
+
+    public function otpVerification($lang = ''){
+        if($lang == '')
+        {
+            $lang = Utility::getValByName('default_language');
+        }
+
+        \App::setLocale($lang);
+
+        $settings = Utility::settings();
+
+        return view('updates.otp_verification', compact('lang','settings'));
+    }
 }

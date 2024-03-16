@@ -42,19 +42,28 @@ class LoginRequest extends FormRequest
      * @throws \Illuminate\Validation\ValidationException
      */
     public function authenticate()
-    {
-        $this->ensureIsNotRateLimited();
+{
+    $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['email'=> $this->email_or_phone, 'password'=>$this->password], $this->boolean('remember')) || ! Auth::attempt(['phone'=> $this->email_or_phone, 'password'=>$this->password], $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+    // Determine the field to use for authentication
+    $field = filter_var($this->email_or_phone, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+    
+    if (!Auth::attempt([$field => $this->email_or_phone, 'password' => $this->password], $this->boolean('remember'))) {
+        RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email_or_phone' => trans('auth.failed'),
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        throw ValidationException::withMessages([
+            'email_or_phone' => trans('auth.failed'),
+        ]);
     }
+
+    
+
+    // Clear the rate limiter on successful login
+    RateLimiter::clear($this->throttleKey());
+
+    // Set a session variable to indicate the method used for login
+    session(['login_method' => $field]);
+}
 
     /**
      * Ensure the login request is not rate limited.
