@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use hisorange\BrowserDetect\Parser as Browser;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -100,15 +101,30 @@ class AuthenticatedSessionController extends Controller
             ]
         );
 
-        // Set pending otp verifcation session
-        session(['otp_verification_pending' => true]);
-        //get the field use to login
-        $field = session('login_method');
-        $otp = rand(100000, 999999); // Generate 6 digit random number
-        $user->otp = $otp;
-        $user->otp_expires_at = now()->addMinutes(10); // Set expiry time
-        $user->save();
-        $user->sent_login_verification_otp($otp);
+        $user_agent = Browser::userAgent();
+        $device_type = Browser::deviceType();
+
+        $device = $user->devices()->firstOrCreate(
+            [
+                'user_agent' => $user_agent,
+                'device_type' => $device_type,
+            ],
+        );
+
+        if($device->authorized == 0)
+        {
+            // Set pending otp verifcation session
+            session(['otp_verification_pending' => true]);
+            //get the field use to login
+            $field = session('login_method');
+            $otp = rand(100000, 999999); // Generate 6 digit random number
+            $user->otp = $otp;
+            $user->otp_expires_at = now()->addMinutes(10); // Set expiry time
+            $user->save();
+            $user->sent_login_verification_otp($otp);
+
+            return redirect()->route('otp-verification');
+        }
         
         //start for user log 
         if ($user->type != 'company' && $user->type != 'super admin')

@@ -7,7 +7,7 @@
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc; background-color: #ffffff;">
         <tr>
             <td align="center" bgcolor="#4CAF50" style="padding: 40px 0 30px 0; color: white; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-                OTP Verification
+                Login Verification
             </td>
         </tr>
         <tr>
@@ -15,7 +15,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                         <td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 20px; line-height: 22px; text-align: center;">
-                            <span style="background-color: #f8f8f8; padding: 10px; border: 1px solid #cccccc; letter-spacing: 2px;">123456</span>
+                            <span style="background-color: #f8f8f8; padding: 10px; border: 1px solid #cccccc; letter-spacing: 2px;">{{ $code }}</span>
                         </td>
                     </tr>
                     <tr>

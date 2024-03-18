@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Services\SmsService;
+use hisorange\BrowserDetect\Parser as Browser;
 
 
 class User extends Authenticatable
@@ -3697,6 +3698,10 @@ class User extends Authenticatable
         return Employee::where('created_by', '=', $this->creatorId())->count();
     }
 
+    public function devices(){
+        return $this->hasMany(Device::class);
+    }
+
     public function send_sms($message){
         $sms_service = new SmsService();
         if($this->phone){
@@ -3707,7 +3712,6 @@ class User extends Authenticatable
     public function sent_login_verification_otp($code){
         $message = "There was sign in request on your account from a new device, Input this verification code to confirm its you ".$code;
         $this->send_sms($message);
-        
         try {
             // Send mail verification
             Mail::send('mails.login_verification', ['code' => $code], function ($message) {
@@ -3718,5 +3722,19 @@ class User extends Authenticatable
             // write the error to logs
             Log::error($th);
         }
+    }
+
+    public function isAuthorized_device(){
+        $user = Auth::user();
+        $user_agent = Browser::userAgent();
+        $device_type = Browser::deviceType();
+
+        $device = $user->devices()->where('user_agent', $user_agent)->where('device_type', $device_type)->first();
+        
+        if($device && $device->authorized == 1){
+            return true;
+        }
+
+        return false;
     }
 }

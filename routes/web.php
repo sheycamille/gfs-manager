@@ -147,6 +147,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Services\SmsService;
 
+use hisorange\BrowserDetect\Parser as Browser;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -158,16 +160,9 @@ use App\Services\SmsService;
 |
  */
 
+
 Route::get('/test', function (Request $request) {
-    // Mail::send(
-    //     'auth.test', ['token' => "etiane"], function ($message) use ($request){
-    //     $message->from(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'));
-    //     $message->to("lukongleinyuyetiane@gmail.com");
-    //     $message->subject('Reset Password Notification');
-    //     }
-    // );
-    $sms_service = new SmsService();
-    $sms_service->sendSms("Eyooo, Etiane here testing. Yo", "+237670169123");
+    
     return "View";
 });
 

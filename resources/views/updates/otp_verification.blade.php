@@ -175,7 +175,7 @@
                 </div>
                 <div class="sm:pt-24 md:mt-36 md:pt-0 md:p-24 w-full">
                     <h2 class="text-3xl font-semibold text-white text-center mt-5">
-                        Login
+                        Identity Verification
                     </h2>
                     <p class="text-white text-center my-5">
                         Enter OTP code to proceed to login
@@ -184,7 +184,7 @@
                         @csrf
                         <div class="mt-8">
                             @if(session('message'))
-                                <p>{{ session::get('messsage' )}}</p>
+                                <p class="text-green-500 my-3">{{ session('message' )}}</p>
                             @endif
                             @if(session('error'))
                                 <h3 class="text-red-500 my-3" role="alert">

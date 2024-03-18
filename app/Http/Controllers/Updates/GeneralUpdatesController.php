@@ -7,23 +7,11 @@ use Illuminate\Http\Request;
 use  App\Models\Utility;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use hisorange\BrowserDetect\Parser as Browser;
+
 
 class GeneralUpdatesController extends Controller
 {
-    private function check_if_verification_needed(){
-        $user = Auth::user();
-        if(session('otp_verification_pending') == false || session('otp_verification_pending') == null){
-            if($user->type =='company' || $user->type =='client')
-            {
-                return redirect()->intended(RouteServiceProvider::HOME);
-
-            }
-            else
-            {
-                return redirect()->intended(RouteServiceProvider::EMPHOME);
-            }
-        }
-    }
     public function login($lang = ''){
         if($lang == '')
         {
@@ -38,7 +26,18 @@ class GeneralUpdatesController extends Controller
     }
 
     public function otpVerification($lang = ''){
-        $this->check_if_verification_needed();
+        $user = Auth::user();
+        if($user->isAuthorized_device()){
+            if($user->type =='company' || $user->type =='client')
+            {
+                return redirect()->intended(RouteServiceProvider::HOME);
+
+            }
+            else
+            {
+                return redirect()->intended(RouteServiceProvider::EMPHOME);
+            }
+        }
         if($lang == '')
         {
             $lang = Utility::getValByName('default_language');
@@ -52,14 +51,21 @@ class GeneralUpdatesController extends Controller
     }
 
     public function verify_otp(Request $request){
-        $this->check_if_verification_needed();
+        $user = Auth::user();
+        if($user->isAuthorized_device()){
+            if($user->type =='company' || $user->type =='client')
+            {
+                return redirect()->intended(RouteServiceProvider::HOME);
+
+            }
+            else
+            {
+                return redirect()->intended(RouteServiceProvider::EMPHOME);
+            }
+        }
         $validated = $request->validate([
             'otp_code' => 'required',
         ]);
-
-        $user = Auth::user();
-
- 
         
         if($user->otp != $validated['otp_code']){
             return redirect()->back()->with('error', "Invalid otp code");
@@ -74,6 +80,15 @@ class GeneralUpdatesController extends Controller
         $user->otp = null;
         $user->otp_expires_at = null;
         $user->save();
+
+        $user_agent = Browser::userAgent();
+        $device_type = Browser::deviceType();
+
+        $device = $user->devices()->where('user_agent', $user_agent)->where('device_type', $device_type)->first();
+        if($device){
+            $device->authorized = 1;
+            $device->save();
+        }
 
         session(['otp_verification_pending' => false]);
 
@@ -90,8 +105,18 @@ class GeneralUpdatesController extends Controller
 
 
     public function resend_otp(Request $request){
-        $this->check_if_verification_needed();
         $user = Auth::user();
+        if($user->isAuthorized_device()){
+            if($user->type =='company' || $user->type =='client')
+            {
+                return redirect()->intended(RouteServiceProvider::HOME);
+
+            }
+            else
+            {
+                return redirect()->intended(RouteServiceProvider::EMPHOME);
+            }
+        }
 
         $otp = rand(100000, 999999); // Generate 6 digit random number
         $user->otp = $otp;
@@ -101,6 +126,6 @@ class GeneralUpdatesController extends Controller
         // send mail to user and sms
         $user->sent_login_verification_otp($otp);
 
-        return redirect()->back()->with('success', "A new opt code has been sent to your email and phone number");
+        return redirect()->back()->with('message', "A new opt code has been sent to your email and phone number");
     }
 }
