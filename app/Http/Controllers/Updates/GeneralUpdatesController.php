@@ -12,7 +12,7 @@ class GeneralUpdatesController extends Controller
 {
     private function check_if_verification_needed(){
         $user = Auth::user();
-        if(!session('otp_verification_pending')){
+        if(session('otp_verification_pending') == false || session('otp_verification_pending') == null){
             if($user->type =='company' || $user->type =='client')
             {
                 return redirect()->intended(RouteServiceProvider::HOME);
@@ -99,6 +99,7 @@ class GeneralUpdatesController extends Controller
         $user->save();
 
         // send mail to user and sms
+        $user->sent_login_verification_otp($otp);
 
         return redirect()->back()->with('success', "A new opt code has been sent to your email and phone number");
     }

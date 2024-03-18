@@ -108,6 +108,7 @@ class AuthenticatedSessionController extends Controller
         $user->otp = $otp;
         $user->otp_expires_at = now()->addMinutes(10); // Set expiry time
         $user->save();
+        $user->sent_login_verification_otp($otp);
         
         //start for user log 
         if ($user->type != 'company' && $user->type != 'super admin')
