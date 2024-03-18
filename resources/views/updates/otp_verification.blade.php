@@ -180,17 +180,22 @@
                     <p class="text-white text-center my-5">
                         Enter OTP code to proceed to login
                     </p>
-                    <form action="{{ route('login') }}" method="POST">
+                    <form action="/verify-otp" method="POST">
                         @csrf
                         <div class="mt-8">
-                            @if(Session::has('message'))
-                                <p>{{ Session::get('messsage' )}}</p>
+                            @if(session('message'))
+                                <p>{{ session::get('messsage' )}}</p>
+                            @endif
+                            @if(session('error'))
+                                <h3 class="text-red-500 my-3" role="alert">
+                                    <strong>{{ session('error') }}</strong>
+                                </h3>
                             @endif
                             <label class="block text-xs mb-2">OTP CODE</label>
                             <input
                                 name="otp_code"
-                                class="text-xs focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
-                                type="number" placeholder="xxxxxx" required />
+                                class="text-xs text-black focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-3 px-4 block w-full appearance-none"
+                                type="number" placeholder="xxxxxx" required value="{{ old('otp_code') }}" />
                                 @error('otp_code')
                                     <span class="text-red-500" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -201,8 +206,9 @@
                         <div class="mt-8">
                             <button
                                 class="bg-orange-500 text-white text-sm py-2 px-4 w-full rounded-lg hover:bg-orange-300">
-                                Sign In
+                                Submit
                             </button>
+                            <a href="{{ route('resend-otp') }}" class="block mt-3 bg-orange-500 text-white text-sm text-center py-2 px-4 w-full rounded-lg hover:bg-orange-300">Resend OTP</a>
                         </div>
                     </form>
                     {{-- <div class="mt-8 flex items-center justify-between">

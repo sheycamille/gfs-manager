@@ -18,7 +18,7 @@ class EnsureOTPVerified
         // Check if the user is authenticated and otp_verification_pending is true
         if (auth()->check() && session('otp_verification_pending') === true) {
             // If the current route is not the OTP verification page, redirect
-            if ($request->path() !== 'otp-verification') {
+            if ($request->path() !== 'otp-verification' && $request->path() !== 'verify-otp' && $request->path() !== 'resend-otp' && $request->path() !== 'logout'){
                 return redirect('otp-verification');
             }
         }
