@@ -144,6 +144,10 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\Updates\GeneralUpdatesController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Services\SmsService;
+
+use hisorange\BrowserDetect\Parser as Browser;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,9 +160,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::get('/test', function (Request $request) {
+    
+    return "View";
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -179,6 +185,9 @@ Route::get('/register', function () {
 });
 
 Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVerification'])->name('otp-verification')->middleware('auth');
+Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
+Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware('auth');
 
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
@@ -1286,12 +1295,12 @@ Route::group(
     }
 );
 
-// Plan Request Module
-Route::get('plan_request', [PlanRequestController::class, 'index'])->name('plan_request.index')->middleware(['auth', 'XSS']);
-Route::get('request_frequency/{id}', [PlanRequestController::class, 'requestView'])->name('request.view')->middleware(['auth', 'XSS']);
-Route::get('request_send/{id}', [PlanRequestController::class, 'userRequest'])->name('send.request')->middleware(['auth', 'XSS']);
-Route::get('request_response/{id}/{response}', [PlanRequestController::class, 'acceptRequest'])->name('response.request')->middleware(['auth', 'XSS']);
-Route::get('request_cancel/{id}', [PlanRequestController::class, 'cancelRequest'])->name('response.cancel')->middleware(['auth', 'XSS']);
+// // Plan Request Module
+// Route::get('plan_request', [PlanRequestController::class, 'index'])->name('plan_request.index')->middleware(['auth', 'XSS']);
+// Route::get('request_frequency/{id}', [PlanRequestController::class, 'requestView'])->name('request.view')->middleware(['auth', 'XSS']);
+// Route::get('request_send/{id}', [PlanRequestController::class, 'userRequest'])->name('send.request')->middleware(['auth', 'XSS']);
+// Route::get('request_response/{id}/{response}', [PlanRequestController::class, 'acceptRequest'])->name('response.request')->middleware(['auth', 'XSS']);
+// Route::get('request_cancel/{id}', [PlanRequestController::class, 'cancelRequest'])->name('response.cancel')->middleware(['auth', 'XSS']);
 //QR Code Module
 
 //--------------------------------------------------------Import/Export Data Route-----------------------------------------------------------------
@@ -1471,7 +1480,7 @@ Route::post('/project_report/tasks/{id}', [ProjectReportController::class, 'ajax
 Route::get('export/task_report/{id}', [ProjectReportController::class, 'export'])->name('project_report.export');
 
 //project copy module
-Route::get('/project/copy/{id}', [ProjectControlle::class, 'copyproject'])->name('project.copy')->middleware(['auth', 'XSS']);
+Route::get('/project/copy/{id}', [ProjectController::class, 'copyproject'])->name('project.copy')->middleware(['auth', 'XSS']);
 Route::post('/project/copy/store/{id}', [ProjectController::class, 'copyprojectstore'])->name('project.copy.store')->middleware(['auth', 'XSS']);
 
 //Google Calendar
