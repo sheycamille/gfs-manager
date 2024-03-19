@@ -235,6 +235,7 @@ class UserController extends Controller
             $request->all(), [
                 'name' => 'required|max:120',
                 'email' => 'required|email|unique:users,email,' . $userDetail['id'],
+                'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone,' . $userDetail['id'],
             ]
         );
         if ($validator->fails()) {
@@ -265,6 +266,7 @@ class UserController extends Controller
         }
         $user['name'] = $request['name'];
         $user['email'] = $request['email'];
+        $user['phone'] = $request['phone'];
         $user->save();
         CustomField::saveData($user, $request->customField);
 

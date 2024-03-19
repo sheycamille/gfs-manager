@@ -61,6 +61,15 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
                                     @enderror --}}
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="phone" class="col-form-label text-dark">{{__('Phone Number')}}</label>
+                                    <input class="form-control" name="phone" type="text" id="phone" value="{{ $userDetail->phone }}" required autocomplete="email">
+                                    {{-- @error('email')
+                                    <span class="invalid-feedback text-danger text-xs" role="alert">{{ $message }}</span>
+                                    @enderror --}}
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <div class="choose-files">
