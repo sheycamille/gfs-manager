@@ -54,6 +54,7 @@ class UserController extends Controller
                     'email' => 'required|email|unique:users',
                     'password' => 'required|min:6',
                     'role' => 'required',
+                    'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone',
                 ]
             );
             if ($validator->fails()) {
@@ -127,6 +128,7 @@ class UserController extends Controller
                     $request->all(), [
                         'name' => 'required|max:120',
                         'email' => 'required|email|unique:users,email,' . $id,
+                        'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone,' . $id,
                     ]
                 );
                 if ($validator->fails()) {
@@ -154,6 +156,7 @@ class UserController extends Controller
                         'name' => 'required|max:120',
                         'email' => 'required|email|unique:users,email,' . $id,
                         'role' => 'required',
+                        'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone,' . $id,
                     ]
                 );
 

@@ -33,6 +33,17 @@
                 </small>
                 @enderror
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{Form::label('phone',__('Phone Number'),['class'=>'form-label'])}}
+                    {{ Form::text('phone', $user->phone, ['class' => 'form-control', 'placeholder' => __('Enter Number'), 'required' => 'required', 'min' => '1']) }}
+                    @error('phone')
+                    <small class="invalid-phone" role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </small>
+                    @enderror
+                </div>
+            </div>
         @endif
         @if(!$customFields->isEmpty())
             <div class="col-md-6">

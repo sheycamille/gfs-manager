@@ -47,6 +47,17 @@
                 @enderror
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                {{Form::label('phone',__('Phone Number'),['class'=>'form-label'])}}
+                {{ Form::text('phone', null, ['class' => 'form-control', 'placeholder' => __('Enter Number'), 'required' => 'required', 'min' => '1']) }}
+                @error('phone')
+                <small class="invalid-phone" role="alert">
+                    <strong class="text-danger">{{ $message }}</strong>
+                </small>
+                @enderror
+            </div>
+        </div>
         @if(!$customFields->isEmpty())
             <div class="col-md-6">
                 <div class="tab-pane fade show" id="tab-2" role="tabpanel">
