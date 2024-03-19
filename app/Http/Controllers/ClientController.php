@@ -78,6 +78,7 @@ class ClientController extends Controller
                     'name' => 'required',
                     'email' => 'required|email|unique:users',
                     'password' => 'required',
+                    'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone',
                 ]
             );
             if($validator->fails())
@@ -101,6 +102,7 @@ class ClientController extends Controller
                                 'name' => $request->name,
                                 'email' => $request->email,
                                 'job_title' => $request->job_title,
+                                'phone' => $request->phone,
                                 'password' => Hash::make($request->password),
                                 'type' => 'client',
                                 'lang' => !empty($default_language) ? $default_language->value : 'en',
@@ -231,6 +233,7 @@ class ClientController extends Controller
                 $validation = [
                     'name' => 'required',
                     'email' => 'required|email|unique:users,email,' . $client->id,
+                    'phone' => 'required|regex:/^\+[\d\s\-\(\)]+$/|unique:users,phone,' . $client->id,
                 ];
 
                 $post         = [];
@@ -249,6 +252,7 @@ class ClientController extends Controller
                     return redirect()->back()->with('error', $messages->first());
                 }
                 $post['email'] = $request->email;
+                $post['phone'] = $request->phone;
 
                 $client->update($post);
 

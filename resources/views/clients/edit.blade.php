@@ -11,6 +11,13 @@
             {{ Form::email('email', null, array('class' => 'form-control','placeholder'=>__('Enter Client Email'),'required'=>'required')) }}
         </div>
 
+        <div class="col-md-12">
+            <div class="form-group">
+                {{Form::label('phone',__('Phone Number'),['class'=>'form-label'])}}
+                {{ Form::text('phone', $client->phone, ['class' => 'form-control', 'placeholder' => __('Enter Number'), 'required' => 'required', 'min' => '1']) }}
+            </div>
+        </div>
+
         @if(!$customFields->isEmpty())
             @include('custom_fields.formBuilder')
         @endif

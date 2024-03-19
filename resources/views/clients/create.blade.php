@@ -9,6 +9,14 @@
             {{ Form::label('email', __('E-Mail Address'),['class'=>'form-label']) }}
             {{ Form::email('email', null, array('class' => 'form-control','placeholder'=>__('Enter Client Email'),'required'=>'required')) }}
         </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                {{Form::label('phone',__('Phone Number'),['class'=>'form-label'])}}
+                {{ Form::text('phone', null, ['class' => 'form-control', 'placeholder' => __('Enter Number'), 'required' => 'required', 'min' => '1']) }}
+            </div>
+        </div>
+
         <div class="form-group">
             {{ Form::label('password', __('Password'),['class'=>'form-label']) }}
             {{Form::password('password',array('class'=>'form-control','placeholder'=>__('Enter User Password'),'required'=>'required','minlength'=>"6"))}}
