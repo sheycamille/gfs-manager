@@ -1,3 +1,8 @@
+@php
+    $logo=URL::TO('assets/images');
+    $company_favicon=Utility::getValByName('company_favicon');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon icon -->
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon" />
+    <link rel="icon" href="{{$logo.'/'.(isset($company_favicon) && !empty($company_favicon)?'gfs_fav_icon.png':'gfs_fav_icon.png')}}" type="image" sizes="16x16">
     <link href="./output.css" rel="stylesheet" />
     <link href="./input.css" rel="stylesheet" />
     <title>Login to your account</title>

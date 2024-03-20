@@ -26,7 +26,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 //                 ->name('login');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-                ->middleware('guest');
+                ->middleware(['guest','throttle:5,30']);
 
 Route::get('/forgot-password/{lang?}', [AuthenticatedSessionController::class, 'showLinkRequestForm'])
                 ->middleware('guest')

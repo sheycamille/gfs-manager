@@ -184,10 +184,10 @@ Route::get('/register', function () {
     return Redirect::to('login');
 });
 
-Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware(['guest']);
 Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVerification'])->name('otp-verification')->middleware('auth');
 Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
-Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware('auth');
+Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth','throttle:5,30']);
 
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
