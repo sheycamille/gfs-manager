@@ -90,6 +90,9 @@
     @endif
 
     @stack('css-page')
+
+    <!-- custom updates css -->
+    <link rel="stylesheet" href="/assets/css/updates.css">
 </head>
 <body class="{{ $color }}">
 <!-- [ Pre-loader ] start -->

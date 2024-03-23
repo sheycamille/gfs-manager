@@ -10,7 +10,6 @@
 @endphp
 
 {{-- <nav class="dash-sidebar light-sidebar {{(isset($mode_setting['cust_theme_bg']) && $mode_setting['cust_theme_bg'] == 'on')?'transprent-bg':''}}"> --}}
-
 @if (isset($setting['cust_theme_bg']) && $setting['cust_theme_bg'] == 'on')
     <nav class="dash-sidebar light-sidebar transprent-bg">
     @else
