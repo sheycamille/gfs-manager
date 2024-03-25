@@ -89,21 +89,42 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    {{ Form::label('branch_id', __('Select Branch*'), ['class' => 'form-label']) }}
+                                    <div class="d-flex justify-content-between mb-2">
+                                        {{ Form::label('branch_id', __('Select Branch*'), ['class' => 'form-label']) }}
+                                        <a href="{{ route('branch.create') }}"
+                                            data-title="{{ __('Create New Branch') }}" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
+                                            data-bs-original-title="{{ __('Create') }}">
+                                            <i class="ti ti-plus"></i>
+                                        </a>
+                                    </div>
                                     <div class="form-icon-user">
                                         {{ Form::select('branch_id', $branches, null, ['class' => 'form-control select2', 'required' => 'required', 'placeholder' => 'Select Branch']) }}
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    {{ Form::label('department_id', __('Select Department*'), ['class' => 'form-label']) }}
+                                    <div class="d-flex justify-content-between mb-2">
+                                        {{ Form::label('department_id', __('Select Department*'), ['class' => 'form-label']) }}
+                                        <a href="{{ route('department.create') }}"
+                                            data-title="{{ __('Create New Department') }}" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
+                                            data-bs-original-title="{{ __('Create') }}">
+                                            <i class="ti ti-plus"></i>
+                                        </a>
+                                    </div>
                                     <div class="form-icon-user">
                                         {{ Form::select('department_id', $departments, null, ['class' => 'form-control select2', 'id' => 'department_id', 'required' => 'required' , 'placeholder' => 'Select Department']) }}
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
-                                    {{ Form::label('designation_id', __('Select Designation'), ['class' => 'form-label']) }}
+                                    <div class="d-flex justify-content-between mb-2">
+                                        {{ Form::label('designation_id', __('Select Designation'), ['class' => 'form-label']) }}
+                                        <a href="{{ route('designation.create') }}"
+                                            data-title="{{ __('Create New Designation') }}" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
+                                            data-bs-original-title="{{ __('Create') }}">
+                                            <i class="ti ti-plus"></i>
+                                        </a>
+                                    </div>
 
                                     <div class="form-icon-user">
                                         {{--  <div class="designation_div">
