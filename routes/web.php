@@ -140,6 +140,7 @@ use App\Http\Controllers\ProjectExpenseController;
 use App\Http\Controllers\NepalstePaymnetController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\EmployeeContractManagementController;
 
 use App\Http\Controllers\Updates\GeneralUpdatesController;
 
@@ -1134,6 +1135,19 @@ Route::group(
         Route::get('contract/{id}/description', [ContractController::class, 'description'])->name('contract.description');
         Route::get('contract/grid', [ContractController::class, 'grid'])->name('contract.grid');
         Route::resource('contract', ContractController::class);
+    }
+);
+
+Route::group(
+    [
+        'middleware' => [
+            'auth',
+            'XSS',
+            'revalidate',
+        ],
+    ], function () {
+        Route::get('emplooyees/contract/{id}/description', [EmployeeContractManagementController::class, 'description'])->name('employee.contract.description');
+        Route::resource('employees/contract', EmployeeContractManagementController::class,["names" => "employees.contract"]);
     }
 );
 

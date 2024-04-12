@@ -490,7 +490,14 @@
                                                 href="{{ route('company-policy.index') }}">{{ __('Company policy') }}</a>
                                         </li>
                                     @endcan
-
+                                    
+                                    @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'HR')
+                                        <li
+                                            class="dash-item {{ request()->is('company-policy*') ? 'active' : '' }}">
+                                            <a class="dash-link"
+                                                href="{{ route('company-policy.index') }}">{{ __('Employee Contract Management') }}</a>
+                                        </li>
+                                    @endif
 
                                     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'HR')
                                         <li
