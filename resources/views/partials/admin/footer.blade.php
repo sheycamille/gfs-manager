@@ -42,6 +42,7 @@
 
 <script src="{{ asset('js/jscolor.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
 
 @if($message = Session::get('success'))
     <script>
