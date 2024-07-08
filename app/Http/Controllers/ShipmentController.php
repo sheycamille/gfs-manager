@@ -81,7 +81,6 @@ class ShipmentController extends Controller
             return redirect()->back()->with('success', 'Successfully saved');
 
         } catch (\Throwable $th) {
-
             Log::error($th);
 
             return redirect()->back()->with('error', 'An error occurred while saving the shipment');

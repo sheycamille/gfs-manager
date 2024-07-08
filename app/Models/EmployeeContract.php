@@ -30,29 +30,30 @@ class EmployeeContract extends Model
         'end_date',
         'description',
         'contract_description',
+        'contract_value',
         'status',
-        'client_signature',
+        'employee_signature',
         'company_signature',
         'created_by'
     ];
 
     public function employee()
     {
-        $this->belongsTo(Employee::class, 'employee_id', 'id');
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 
     public function contractType()
     {
-        $this->belongsTo(ContractType::class, 'contract_type_id', 'id');
+        return $this->belongsTo(ContractType::class, 'contract_type_id', 'id');
     }
 
     public function createdBy()
     {
-        $this->belongsTo(User::class, 'created_by', 'id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function template()
     {
-        $this->belongsTo(EmployeeContractTemplate::class, 'template_id', 'id');
+        return $this->belongsTo(EmployeeContractTemplate::class, 'template_id', 'id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Updates;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use  App\Models\Utility;
 use Illuminate\Support\Facades\Auth;
@@ -127,5 +128,21 @@ class GeneralUpdatesController extends Controller
         $user->sent_login_verification_otp($otp);
 
         return redirect()->back()->with('message', "A new opt code has been sent to your email and phone number");
+    }
+
+    public function tracking() 
+    {
+        return view("customerShipmentTracking.tracking");
+    }
+
+    public function trackShipment(Request $request){
+        $request->validate([
+            "tracking_no" => "required"
+        ]);
+        $shipment = Shipment::where('tracking_no', $request->tracking_no)->first();
+        return response()->json([
+            "status" => "success",
+            "data" => $shipment
+        ]);
     }
 }

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Updates\GeneralUpdatesController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,7 @@ use App\Http\Controllers\ApiController;
 |
 */
 Route::post('login', 'ApiController@login');
+Route::post('track', [GeneralUpdatesController::class, "trackShipment"])->name("api.tracking");
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 

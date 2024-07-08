@@ -1,4 +1,4 @@
-{{ Form::open(array('url' => 'employees/contract/store')) }}
+{{ Form::open(array('url' => 'employees/contract/'.$contract->id.'/update')) }}
 <div class="modal-body">
     {{-- start for ai module--}}
     @php
@@ -19,7 +19,7 @@
             <select name="employee_id" id="employee_id" class="form-control">
                 <option disabled selected>--Select Employee</option>
                 @foreach($employees as $employee)
-                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                    <option value="{{ $employee->id }}" {{ $employee->id == $contract->employee_id?'selected':"" }}>{{ $employee->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -29,7 +29,7 @@
             <select name="contract_type_id" id="contractType" class="form-control">
                 <option disabled selected>--Select Contract Type</option>
                 @foreach($contractTypes as $contract_type)
-                    <option value="{{ $contract_type->id }}">{{ $contract_type->name }}</option>
+                    <option value="{{ $contract_type->id }}" {{ $contract_type->id == $contract->contract_type_id?'selected':"" }}>{{ $contract_type->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -38,7 +38,7 @@
             <select name="template_id" id="template_id" class="form-control">
                 <option disabled selected>--Select Contract Template</option>
                 @foreach($templates as $template)
-                    <option value="{{ $template->id }}">{{ $template->name }}</option>
+                    <option value="{{ $template->id }}" {{ $template->id == $contract->template_id?'selected':"" }}>{{ $template->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -46,36 +46,36 @@
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-control">
                 <option disabled selected>--Select Status</option>
-                <option value="accept">Accepted</option>
-                <option value="pending">Pending</option>
-                <option value="suspended">Suspended</option>
+                <option value="accept" {{ 'accept' == $contract->status?'selected':"" }}>Accepted</option>
+                <option value="pending" {{ 'pending' == $contract->status?'selected':"" }}>Pending</option>
+                <option value="suspended" {{ 'suspended' == $contract->status?'selected':"" }}>Suspended</option>
             </select>
         </div>
         
         <div class="form-group col-md-6">
             {{ Form::label('value', __('Contract Value'),['class'=>'form-label']) }}
-            {{ Form::number('contract_value', '', array('class' => 'form-control','required'=>'required','stage'=>'0.01')) }}
+            <input type="number" name="contract_value" class="form-control" value="{{ $contract->contract_value }}" required>
         </div>
         <div class="form-group col-md-6">
             {{ Form::label('start_date', __('Start Date'),['class'=>'form-label']) }}
-            {{ Form::date('start_date', '', array('class' => 'form-control','required'=>'required')) }}
+            <input type="date" name="start_date" class="form-control" value="{{ $contract->start_date }}" required>
         </div>
         <div class="form-group col-md-6">
             {{ Form::label('end_date', __('End Date'),['class'=>'form-label']) }}
-            {{ Form::date('end_date', '', array('class' => 'form-control','required'=>'required')) }}
+            <input type="date" name="end_date" class="form-control" value="{{ $contract->end_date }}" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-12">
             {{ Form::label('description', __('Description'),['class'=>'form-label']) }}
-            {!! Form::textarea('description', null, ['class'=>'form-control','rows'=>'3']) !!}
+            <textarea name="description" class="form-control" cols="30" rows="3"> {{ $contract->description }} </textarea>
         </div>
     </div>
 </div>
 </div>
 <div class="modal-footer">
     <input type="button" value="{{__('Cancel')}}" class="btn  btn-light" data-bs-dismiss="modal">
-    <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
+    <input type="submit" value="{{__('Update')}}" class="btn  btn-primary">
 </div>
 {{Form::close()}}
 

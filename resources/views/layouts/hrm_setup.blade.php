@@ -36,5 +36,7 @@
 
         <a href="{{ route('competencies.index') }}" class="list-group-item list-group-item-action border-0 {{ request()->is('competencies*') ? 'active' : '' }}">{{__('Competencies')}}<div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
 
+        <a href="{{ route('employee.contract.template.index') }}" class="list-group-item list-group-item-action border-0 {{ request()->is('employee-contract*') ? 'active' : '' }}">{{__('Employee Contract Templates')}}<div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+
     </div>
 </div>

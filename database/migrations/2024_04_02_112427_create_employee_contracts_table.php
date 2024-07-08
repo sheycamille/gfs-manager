@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('description')->nullable();
             $table->text('contract_description')->nullable();
+            $table->integer('contract_value')->nullable();
             $table->string('status')->default('pending');;
             $table->longText('client_signature')->nullable();
             $table->longText('company_signature')->nullable();
