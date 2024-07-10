@@ -11,7 +11,7 @@
 @section('action-btn')
     <div class="float-end">
         @if(\Auth::user()->type == 'company')
-            <a href="#" data-size="md" data-url="{{ route('employees.contract.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Contract')}}" class="btn btn-sm btn-primary">
+            <a href="{{ route('employees.contract.create') }}" class="btn btn-sm btn-primary">
                 <i class="ti ti-plus"></i>
             </a>
         @endif
@@ -73,17 +73,21 @@
                                             @if(\Auth::user()->type=='company')
                                                 @if($contract->status=='accept')
                                                     <div class="action-btn bg-primary ms-2">
-                                                        <a href="#" data-size="lg"
-                                                        data-url="{{ route('contract.copy', $contract->id) }}"
-                                                        data-ajax-popup="true"
-                                                        data-title="{{ __('Copy Contract') }}"
+                                                        <a href="{{ url('/employees/contract/'.$contract->id.'/edit?type=duplicate') }}"
                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        title="{{ __('Duplicate') }}"><i
+                                                        ><i
                                                                 class="ti ti-copy text-white"></i>
                                                         </a>
                                                     </div>
                                                 @endif
+                                            @endif
+                                            @if($contract->file != null)
+                                                <div class="action-btn bg-primary ms-2">
+                                                    <a class="mx-3 btn btn-sm align-items-center"
+                                                    href="{{ $contract->file }}" download>
+                                                        <i class="ti ti-download text-white"></i>
+                                                    </a>
+                                                </div>
                                             @endif
                                             {{-- @can('show contract')
                                                 <div class="action-btn bg-warning ms-2">
@@ -95,7 +99,7 @@
                                             @endcan --}}
                                             @can('edit contract')
                                                 <div class="action-btn bg-info ms-2">
-                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-url="{{ route('employees.contract.edit',$contract->id) }}" data-ajax-popup="true" data-size="md" data-bs-toggle="tooltip" title="{{__('Edit')}}" data-title="{{__('Edit Contract')}}">
+                                                    <a href="{{ route('employees.contract.edit',$contract->id) }}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
                                                         <i class="ti ti-pencil text-white"></i>
                                                     </a></div>
                                             @endcan

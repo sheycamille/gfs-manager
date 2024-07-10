@@ -17,7 +17,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/main.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <script src="./login.js"></script>
     <style>
@@ -28,17 +33,34 @@
             background-position: center;
             background-size: cover  
         }
+        .btn-primary2 {
+            --bs-btn-color: #F47827;
+            --bs-btn-bg: #F47827;
+            --bs-btn-border-color: #F47827;
+            --bs-btn-hover-color: #ffffff;
+            --bs-btn-hover-bg: #F47827;
+            --bs-btn-hover-border-color: #F47827;
+            --bs-btn-focus-shadow-rgb: 133, 223, 95;
+            --bs-btn-active-color: #ffffff;
+            --bs-btn-active-bg: #F47827;
+            --bs-btn-active-border-color: #F47827;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #ffffff;
+            --bs-btn-disabled-bg: #F47827;
+            --bs-btn-disabled-border-color: #F47827;
+            
+        }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="" style="font-family: 'Open Sans','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+<body class="theme-3" style="font-family: 'Open Sans','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
     <section class="bg-image overlay" id="header">
         <header class="container">
             <div class="row pt-3 justify-content-between">
                 <div class="col-md-3">
                     <a href="/">
-                        <img src="{{ asset("assets/images/GFS_Logo.png") }}" height="100px" width="100px" alt="">
+                        <img src="{{ asset("assets/images/GFS_Logo-2.png") }}" height="200px" width="200px" alt="">
                     </a>
                 </div>
                 <div class="col-md-7 text-end">
@@ -56,9 +78,12 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <div class="input-group mb-3">
-                            <input type="text" name="tracking_no" required class="form-control" placeholder="Enter Your Tracking No" id="tracking_no">
-                            <button class="btn btn-outline-primary px-5" type="submit" id="button-addon1">Track</button>
+                        <div class="card card-body" >
+                            <div class="input-group mb-3">
+                                <input type="text" name="tracking_no" required class="form-control" placeholder="Enter Your Tracking No" id="tracking_no">
+                                <button class="btn btn-primary2 px-5" type="submit" id="button-addon1">Track</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -147,16 +172,16 @@
             cardTitleDiv.classList.add("card-title", "text-center", "p-2");
 
             const cardTitleH2 = document.createElement("h2");
-            cardTitleH2.textContent = "Shipment #" + data.tracking_no + ": " + data.tracking_no;
+            cardTitleH2.textContent = "Shipment No " + data.tracking_no + ": " + data.package_status;
 
             const cardBodyDiv = document.createElement("div");
             cardBodyDiv.classList.add("card-body");
 
-            const currentLocationH3 = document.createElement("h3");
-            currentLocationH3.textContent = "Current Location: " + data.package_statuss;
+            const currentLocationH3 = document.createElement("p");
+            currentLocationH3.textContent = "Destination: " + data.destination;
             currentLocationH3.classList.add("mb-3");  // Add class for margin
 
-            const lastUpdatedH3 = document.createElement("h3");
+            const lastUpdatedH3 = document.createElement("p");
             lastUpdatedH3.textContent = "Last Updated: " + data.updated_at;
 
             // Nest the elements in the proper hierarchy

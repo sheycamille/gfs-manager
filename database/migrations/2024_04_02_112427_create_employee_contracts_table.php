@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description')->nullable();
+            $table->string('file')->nullable();
             $table->text('contract_description')->nullable();
             $table->integer('contract_value')->nullable();
             $table->string('status')->default('pending');;

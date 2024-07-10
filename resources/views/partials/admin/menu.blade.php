@@ -44,7 +44,7 @@
                             <span class="dash-micon">
                                 <i class="ti ti-home"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Dashboard') }}</span>
+                            <span class="dash-mtext text-uppercase">{{ __('Dashboard') }}</span>
                            </a>
                            
                     </li>
@@ -119,7 +119,7 @@
                             : '' }}">
                         <a href="#!" class="dash-link "><span class="dash-micon"><i
                                     class="fa-solid fa-chart-simple"></i></span><span
-                                class="dash-mtext">{{ __('Admin & Payroll') }}</span><span class="dash-arrow">
+                                class="dash-mtext text-uppercase">{{ __('Admin & Payroll') }}</span><span class="dash-arrow">
                                 <i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="dash-submenu">
@@ -720,7 +720,7 @@
                             : '' }}">
                         <a href="#" class="dash-link"><span class="dash-micon"><i
                                     class="fa-solid fa-truck"></i></span><span
-                                class="dash-mtext">{{ __('Operation & Transport') }}</span><span class="dash-arrow">
+                                class="dash-mtext text-uppercase">{{ __('Operation & Transport') }}</span><span class="dash-arrow">
                                 <i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="dash-submenu">
@@ -841,7 +841,7 @@
                                 </svg>
                             </span>
                             <span
-                                class="dash-mtext">{{ __('Legal') }}</span><span class="dash-arrow"><i
+                                class="dash-mtext text-uppercase">{{ __('Legal') }}</span><span class="dash-arrow"><i
                                     data-feather="chevron-right"></i></span></a>
                         <ul
                             class="dash-submenu {{ Request::segment(1) == 'stages' || Request::segment(1) == 'insurance-management' || Request::segment(1) == 'sources' || Request::segment(1) == 'lead_stages' || Request::segment(1) == 'leads' || Request::segment(1) == 'form_builder' || Request::segment(1) == 'form_response' || Request::segment(1) == 'deals' || Request::segment(1) == 'pipelines' ? 'show' : '' }}">
@@ -954,7 +954,7 @@
                                 <path d="M8.69141 12.2644V6.69141H10.3074V12.2644L9.49941 11.4414L8.69141 12.2644ZM13.0374 14.4954V2.69141H14.6534V12.8804L13.0374 14.4954ZM4.30741 16.6374V10.6914H5.92241V15.0224L4.30741 16.6374ZM4.19141 20.5494L9.48741 15.2534L13.0374 18.3034L19.7914 11.5494H17.4994V10.5494H21.4994V14.5494H20.4994V12.2574L13.0614 19.6954L9.51141 16.6454L5.60741 20.5494H4.19141Z" fill="#7D8198"/>
                             </svg>
                         </span>
-                        <span class="dash-mtext">{{__('Finance & Accounting')}}</span><span class="dash-arrow">
+                        <span class="dash-mtext text-uppercase">{{__('Finance & Accounting')}}</span><span class="dash-arrow">
                         <i data-feather="chevron-right"></i></span>
                 </a>
                         <ul class="dash-submenu">
@@ -1069,7 +1069,7 @@
                             <path d="M21.7097 8.70968C22.9597 7.45968 22.3897 5.99968 21.7097 5.28968L18.7097 2.28968C17.4497 1.03968 15.9997 1.60968 15.2897 2.28968L13.5897 3.99968H10.9997C9.09969 3.99968 7.99968 4.99968 7.43968 6.14968L2.99968 10.5897V14.5897L2.28968 15.2897C1.03968 16.5497 1.60968 17.9997 2.28968 18.7097L5.28968 21.7097C5.82968 22.2497 6.40968 22.4497 6.95968 22.4497C7.66968 22.4497 8.31968 22.0997 8.70968 21.7097L11.4097 18.9997H14.9997C16.6997 18.9997 17.5597 17.9397 17.8697 16.8997C18.9997 16.5997 19.6197 15.7397 19.8697 14.8997C21.4197 14.4997 21.9997 13.0297 21.9997 11.9997V8.99968H21.4097L21.7097 8.70968ZM19.9997 11.9997C19.9997 12.4497 19.8097 12.9997 18.9997 12.9997H17.9997V13.9997C17.9997 14.4497 17.8097 14.9997 16.9997 14.9997H15.9997V15.9997C15.9997 16.4497 15.8097 16.9997 14.9997 16.9997H10.5897L7.30968 20.2797C6.99968 20.5697 6.81968 20.3997 6.70968 20.2897L3.71968 17.3097C3.42968 16.9997 3.59968 16.8197 3.70968 16.7097L4.99968 15.4097V11.4097L6.99968 9.40968V10.9997C6.99968 12.2097 7.79969 13.9997 9.99969 13.9997C12.1997 13.9997 12.9997 12.2097 12.9997 10.9997H19.9997V11.9997ZM20.2897 7.28968L18.5897 8.99968H10.9997V10.9997C10.9997 11.4497 10.8097 11.9997 9.99969 11.9997C9.18969 11.9997 8.99968 11.4497 8.99968 10.9997V7.99968C8.99968 7.53968 9.16969 5.99968 10.9997 5.99968H14.4097L16.6897 3.71968C16.9997 3.42968 17.1797 3.59968 17.2897 3.70968L20.2797 6.68968C20.5697 6.99968 20.3997 7.17968 20.2897 7.28968Z" fill="#7D8198"/>
                             </svg>
                             </span
-                            ><span class="dash-mtext text-sm">{{__('Business Dev & Partnership ')}}</span
+                            ><span class="dash-mtext text-sm text-uppercase">{{__('Business Dev & Partnership ')}}</span
                             ><span class="dash-arrow"><i data-feather="chevron-right"></i></span
                             ></a>
                         <ul class="dash-submenu {{ (Request::segment(1) == 'stages' || Request::segment(1) == 'labels' || Request::segment(1) == 'sources' || Request::segment(1) == 'lead_stages' || Request::segment(1) == 'leads'  || Request::segment(1) == 'form_builder' || Request::segment(1) == 'form_response' || Request::segment(1) == 'deals' || Request::segment(1) == 'pipelines')?'show':''}}">
@@ -1148,7 +1148,7 @@
                                 </svg>
                                     
                             </span>
-                            <span class="dash-mtext">{{ __('Marketing ') }}</span><span class="dash-arrow">
+                            <span class="dash-mtext text-uppercase">{{ __('Marketing ') }}</span><span class="dash-arrow">
                                 <i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="dash-submenu">
@@ -1204,7 +1204,7 @@
                                 <path d="M18.72 14.8408C19.07 13.9908 19.26 13.0808 19.26 12.0808C19.26 11.3608 19.15 10.6708 18.96 10.0308C18.31 10.1808 17.63 10.2608 16.92 10.2608C15.466 10.2623 14.0329 9.91428 12.7415 9.24598C11.4502 8.57768 10.3384 7.60871 9.5 6.42076C8.6031 8.59093 6.91112 10.3366 4.77 11.3008C4.73 11.5508 4.73 11.8208 4.73 12.0808C4.73 13.0355 4.91804 13.9808 5.2834 14.8629C5.64875 15.7449 6.18425 16.5463 6.85933 17.2214C8.22272 18.5848 10.0719 19.3508 12 19.3508C13.05 19.3508 14.06 19.1208 14.97 18.7108C15.54 19.8008 15.8 20.3408 15.78 20.3408C14.14 20.8908 12.87 21.1608 12 21.1608C9.58 21.1608 7.27 20.2108 5.57 18.5008C4.536 17.4699 3.76737 16.2038 3.33 14.8108H2V10.2608H3.09C3.42024 8.65327 4.17949 7.16517 5.28719 5.95435C6.39489 4.74353 7.80971 3.85516 9.38153 3.38352C10.9534 2.91187 12.6235 2.87453 14.2149 3.27546C15.8062 3.6764 17.2593 4.50065 18.42 5.66076C19.6802 6.91601 20.5398 8.51686 20.89 10.2608H22V14.8108H21.94L18.38 18.0808L13.08 17.4808V15.8108H17.91L18.72 14.8408ZM9.27 11.8508C9.57 11.8508 9.86 11.9708 10.07 12.1908C10.281 12.4035 10.3995 12.6911 10.3995 12.9908C10.3995 13.2904 10.281 13.578 10.07 13.7908C9.86 14.0008 9.57 14.1208 9.27 14.1208C8.64 14.1208 8.13 13.6208 8.13 12.9908C8.13 12.3608 8.64 11.8508 9.27 11.8508ZM14.72 11.8508C15.35 11.8508 15.85 12.3608 15.85 12.9908C15.85 13.6208 15.35 14.1208 14.72 14.1208C14.09 14.1208 13.58 13.6208 13.58 12.9908C13.58 12.6884 13.7001 12.3984 13.9139 12.1847C14.1277 11.9709 14.4177 11.8508 14.72 11.8508Z" fill="#7D8198"/>
                             </svg>    
                           </span>
-                          <span class="dash-mtext">{{ __('Customer experience ') }}</span><span class="dash-arrow">
+                          <span class="dash-mtext text-uppercase">{{ __('Customer experience ') }}</span><span class="dash-arrow">
                               <i data-feather="chevron-right"></i></span>
                       </a>
                       <ul class="dash-submenu">
@@ -1247,7 +1247,7 @@
                                 <path d="M6.5 8.11001V4.28001C6.5 4.1115 6.53327 3.94464 6.59791 3.78902C6.66255 3.63339 6.75728 3.49207 6.87667 3.37314C6.99606 3.25422 7.13776 3.16004 7.29363 3.09601C7.4495 3.03197 7.61649 2.99935 7.785 3.00001H21.47L19.32 6.72001V14.28C19.3207 14.4487 19.2878 14.6159 19.2234 14.7718C19.159 14.9277 19.0643 15.0693 18.9448 15.1884C18.8253 15.3074 18.6833 15.4016 18.5272 15.4654C18.371 15.5292 18.2037 15.5613 18.035 15.56H16.735V19.39C16.735 19.7291 16.601 20.0544 16.3622 20.2951C16.1233 20.5358 15.7991 20.6724 15.46 20.675H5.415C5.24606 20.675 5.0788 20.6416 4.92284 20.5766C4.76689 20.5117 4.62534 20.4165 4.50635 20.2966C4.38736 20.1767 4.29328 20.0344 4.22955 19.8779C4.16581 19.7215 4.13368 19.5539 4.135 19.385V11.835L2 8.11001H6.5ZM6.5 8.11001H7.965M16.735 14.09V9.39501C16.735 9.05507 16.6003 8.72898 16.3604 8.48814C16.1205 8.2473 15.7949 8.11133 15.455 8.11001H7.955M16.75 14.09V15.56M9.18 6.29001H16.845M8.235 11.935C8.48298 11.935 8.7208 12.0335 8.89614 12.2089C9.07149 12.3842 9.17 12.622 9.17 12.87C9.17 13.118 9.07149 13.3558 8.89614 13.5312C8.7208 13.7065 8.48298 13.805 8.235 13.805C7.98702 13.805 7.7492 13.7065 7.57386 13.5312C7.39851 13.3558 7.3 13.118 7.3 12.87C7.3 12.622 7.39851 12.3842 7.57386 12.2089C7.7492 12.0335 7.98702 11.935 8.235 11.935ZM12.61 11.935C12.7985 11.923 12.9862 11.9684 13.1484 12.0651C13.3106 12.1619 13.4397 12.3055 13.5187 12.477C13.5977 12.6486 13.6229 12.8401 13.591 13.0262C13.559 13.2124 13.4715 13.3845 13.3398 13.5199C13.2081 13.6553 13.0386 13.7477 12.8534 13.7848C12.6682 13.822 12.4761 13.8022 12.3024 13.7281C12.1287 13.6539 11.9815 13.5289 11.8802 13.3695C11.7789 13.2101 11.7283 13.0238 11.735 12.835C11.7401 12.5939 11.8381 12.3642 12.0086 12.1937C12.1791 12.0232 12.4089 11.9251 12.65 11.92L12.61 11.935ZM7.235 15.515H13.655C13.4501 16.2081 13.0265 16.8163 12.4475 17.2488C11.8686 17.6814 11.1652 17.9151 10.4425 17.9151C9.71978 17.9151 9.01645 17.6814 8.43747 17.2488C7.8585 16.8163 7.43493 16.2081 7.23 15.515H7.235Z" stroke="#7D8198" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>    
                           </span>
-                          <span class="dash-mtext">{{ __('Messaging & Meeting') }}</span><span class="dash-arrow">
+                          <span class="dash-mtext text-uppercase">{{ __('Messaging & Meeting') }}</span><span class="dash-arrow">
                               <i data-feather="chevron-right"></i></span>
                       </a>
                       <ul class="dash-submenu">
@@ -1313,7 +1313,7 @@
                     </svg>
                         
                     </span>
-                    <span class="dash-mtext">{{ __('Apps & Integrations ') }}</span><span class="dash-arrow">
+                    <span class="dash-mtext text-uppercase">{{ __('Apps & Integrations ') }}</span><span class="dash-arrow">
                         <i data-feather="chevron-right"></i></span>
                 </a>
                 <ul class="dash-submenu">
@@ -1350,7 +1350,7 @@
                 <span class="dash-micon">
                     <i class="fa-solid fa-circle-question"></i>  
                 </span>
-                <span class="dash-mtext">{{ __('Help ') }}</span>
+                <span class="dash-mtext text-uppercase">{{ __('Help ') }}</span>
             </a>
 
         </li>
@@ -1379,7 +1379,7 @@
                         </defs>
                     </svg>
                 </span>
-                <span class="dash-mtext">{{ __('Settings ') }}</span>
+                <span class="dash-mtext text-uppercase">{{ __('Settings ') }}</span>
             </a>
 
         </li>
@@ -1388,7 +1388,7 @@
                 <span class="dash-micon">
                     <i class="fa-solid fa-right-from-bracket text-danger"></i>
                 </span>
-                <span class="dash-mtext text-danger">{{ __('Logout ') }}</span>
+                <span class="dash-mtext text-danger text-uppercase">{{ __('Logout ') }}</span>
             </a>
 
         </li>

@@ -27,6 +27,7 @@ class EmployeeContract extends Model
         'contract_type_id',
         'template_id',
         'start_date',
+        'file',
         'end_date',
         'description',
         'contract_description',

@@ -77,6 +77,7 @@ class Utility extends Model
             "site_date_format" => "M j, Y",
             "site_time_format" => "g:i A",
             "company_name" => "",
+            "company_name_abbrev" => "",
             "company_address" => "",
             "company_city" => "",
             "company_state" => "",
@@ -268,6 +269,7 @@ class Utility extends Model
             "site_date_format" => "M j, Y",
             "site_time_format" => "g:i A",
             "company_name" => "",
+            "company_name_abbrev" => "",
             "company_address" => "",
             "company_city" => "",
             "company_state" => "",
@@ -2405,6 +2407,7 @@ class Utility extends Model
         $arrVariable = [
             '{app_name}',
             '{company_name}',
+            '{company_name_abbrev}',
             '{app_url}',
             '{email}',
             '{password}',
@@ -2536,6 +2539,7 @@ class Utility extends Model
         $arrValue = [
             'app_name' => '-',
             'company_name' => '-',
+            'company_name_abbrev' => '-',
             'app_url' => '-',
             'email' => '-',
             'password' => '-',
