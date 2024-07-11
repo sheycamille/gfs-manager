@@ -1,3 +1,11 @@
+<style>
+    .overme {
+        width: 50%;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+    }
+</style>
 @php
     $users=\Auth::user();
     // $profiles=asset(Storage::url('uploads/avatar/'));
@@ -194,8 +202,8 @@
                             <span class="theme-avtar">
                                 <img src="{{ !empty(\Auth::user()->avatar) ? $profile .'/'. \Auth::user()->avatar :  $defaultProfile.'/'.'avatar-1.jpg'}}" class="img-fluid rounded-circle">
                             </span>
-                            <span class="hide-mob ms-2">
-                                {{__('Hi, ')}}{{\Auth::user()->name }} !
+                            <span class="hide-mob ms-2" >
+                                {{__('Hi, ')}}{{strlen(\Auth::user()->name) > 8? substr(\Auth::user()->name,0,8)."...": \Auth::user()->name  }} !
                                 <p class="text-xs text-muted text-center">S Admin: DG</p>
                             </span>
                             <i class="ti ti-chevron-down drp-arrow nocolor hide-mob"></i>

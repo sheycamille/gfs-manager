@@ -54,7 +54,7 @@
 
             {{-- main --}}
             <li class="mt-5 mb-3 d-flex justify-content-center">
-                <input type="text" class="form-control w-75" readonly placeholder="Main" style="border-top: 0; border-left: 0; border-right: 0; border-radius: 0;">    
+                <input type="text" id="sidebar-search" class="form-control w-75" placeholder="Search Menu" style="border-top: 0; border-left: 0; border-right: 0; border-radius: 0;">    
             </li>
             {{--  --}}
             <!--------------------- Start  Admin & Payroll ----------------------------------->
@@ -129,11 +129,11 @@
                                         <a class="dash-link" href="#">{{ __('Employee Management') }}<span
                                                 class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                         <ul class="dash-submenu">
-                                            <li
+                                            {{-- <li
                                                 class="dash-item {{ \Request::route()->getName() == 'hrm.dashboard' ? ' active' : '' }}">
                                                 <a class="dash-link"
                                                     href="{{ route('hrm.dashboard') }}">{{ __('Dashboard') }}</a>
-                                            </li>
+                                            </li> --}}
                                             @can('manage report')
                                                 <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'reports-monthly-attendance' || Request::segment(1) == 'reports-leave' || Request::segment(1) == 'reports-payroll' ? 'active dash-trigger' : '' }}"
                                                     href="#hr-report" data-toggle="collapse" role="button"
@@ -1291,7 +1291,7 @@
             <!--------------------- Start apps integrations ----------------------------------->
 
             @if (Gate::check('manage product & service') || Gate::check('manage product & service'))
-            <li class="dash-item dash-hasmenu">
+            <li class="dash-item">
                 <a href="#!" class="dash-link ">
                     <span class="dash-micon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1313,26 +1313,14 @@
                     </svg>
                         
                     </span>
-                    <span class="dash-mtext text-uppercase">{{ __('Apps & Integrations ') }}</span><span class="dash-arrow">
-                        <i data-feather="chevron-right"></i></span>
+                    <span class="dash-mtext text-uppercase">
+                        {{ __('Apps & Integrations ') }}
+                    </span>
+                    <span class="dash-arrow">
+                        <i data-feather="chevron-right"></i>
+                    </span>
                 </a>
-                <ul class="dash-submenu">
-                    @if (Gate::check('manage company settings'))
-                        <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'settings' ? ' active' : '' }}">
-                            <a href="{{ route('settings') }}" class="dash-link">
-                        <span class="dash-mtext">{{ __('System Settings') }}</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if (Gate::check('manage company settings'))
-                        <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'settings' ? ' active' : '' }}">
-                            <a href="{{ route('profile') }}" class="dash-link">
-                            <span class="dash-mtext">{{ __('profile Settings') }}</span>
-                            </a>
-                        </li>
-                    @endif
-                    @include('landingpage::menu.landingpage')
-                </ul>
+                
 
             </li>
             @endif
@@ -1354,8 +1342,8 @@
             </a>
 
         </li>
-        <li class="dash-item">
-            <a href="#!" class="dash-link ">
+        <li class="dash-item dash-hasmenu">
+            <a href="#!" class="dash-link {{ Request::segment(1) == 'settings' ? ' active' : '' }}">
                 <span class="dash-micon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_2835_415)">
@@ -1380,7 +1368,27 @@
                     </svg>
                 </span>
                 <span class="dash-mtext text-uppercase">{{ __('Settings ') }}</span>
+                <span class="dash-arrow">
+                    <i data-feather="chevron-right"></i>
+                </span>
             </a>
+            <ul class="dash-submenu">
+                @if (Gate::check('manage company settings'))
+                    <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'settings' ? ' active' : '' }}">
+                        <a href="{{ route('settings') }}" class="dash-link">
+                            <span class="dash-mtext">{{ __('System Settings') }}</span>
+                        </a>
+                    </li>
+                @endif
+                @if (Gate::check('manage company settings'))
+                    <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'settings' ? ' active' : '' }}">
+                        <a href="{{ route('profile') }}" class="dash-link">
+                        <span class="dash-mtext">{{ __('profile Settings') }}</span>
+                        </a>
+                    </li>
+                @endif
+                @include('landingpage::menu.landingpage')
+            </ul>
 
         </li>
         <li class="dash-item">
@@ -1543,3 +1551,17 @@
     </div>
 </div>
 </nav>
+
+<script>
+    document.getElementById("sidebar-search").addEventListener("input", (e) => {
+        var filter = e.target.value.toLowerCase();
+        var nodes = document.getElementsByClassName('dash-item');
+        for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i].innerHTML.toLowerCase().includes(filter)) {
+            nodes[i].style.display = "block";
+            } else {
+            nodes[i].style.display = "none";
+            }
+        }
+    });
+</script>

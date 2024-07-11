@@ -58,13 +58,29 @@
     <section class="bg-image overlay" id="header">
         <header class="container">
             <div class="row pt-3 justify-content-between">
-                <div class="col-md-3">
+                <div class="col-3">
                     <a href="/">
                         <img src="{{ asset("assets/images/GFS_Logo-2.png") }}" height="200px" width="200px" alt="">
                     </a>
                 </div>
-                <div class="col-md-7 text-end">
-
+                <div class="col-7 text-end">
+                    <div class="d-flex justify-content-center d-none d-lg-block">
+                        <a href="https://www.globalfreightageservices.com/" class="text-white mx-3">Home</a>
+                        <a href="https://www.globalfreightageservices.com/about" class="text-white mx-3">About</a>
+                        <a href="#" class="text-white mx-3">Tracking</a>
+                        <a href="https://www.globalfreightageservices.com/contact" class="text-white mx-3">Contact Us</a>
+                    </div>
+                    <div class="dropdown d-lg-none">
+                        <a href="#" class="btn btn-neutral text-white" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bars text-white"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="https://www.globalfreightageservices.com/">Home</a></li>
+                          <li><a class="dropdown-item" href="https://www.globalfreightageservices.com/about">About</a></li>
+                          <li><a class="dropdown-item" href="#">Tracking</a></li>
+                          <li><a class="dropdown-item" href="https://www.globalfreightageservices.com/contact">Contact Us</a></li>
+                        </ul>
+                      </div>
                 </div>
             </div>
         </header>
@@ -81,7 +97,7 @@
                         <div class="card card-body" >
                             <div class="input-group mb-3">
                                 <input type="text" name="tracking_no" required class="form-control" placeholder="Enter Your Tracking No" id="tracking_no">
-                                <button class="btn btn-primary2 px-5" type="submit" id="button-addon1">Track</button>
+                                <button class="btn btn-primary px-5 bg-primary" type="submit" id="button-addon1">Track</button>
                             </div>
 
                         </div>
@@ -97,6 +113,10 @@
                 <div class="spinner-grow d-none" role="status" id="loader">
                     <span class="visually-hidden">Loading...</span>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 mx-auto">
                 <div id="results"></div>
             </div>
         </div>
@@ -167,29 +187,121 @@
         function createResultCard(data) {
             const cardDiv = document.createElement("div");
             cardDiv.classList.add("card");  // Add classes
+            cardDiv.innerHTML = `<div class="col-md-10 mx-auto py-4">
+            <div  class="text-center ">
+                <div class="comp_logo">
+                    <img decoding="async" src="./assets/images/GFS_Logo.png"
+                        style="margin: 0 auto;">
+                </div>
+                <div class="b_code mt-3">
+                    <img decoding="async"
+                        src="data:image/png;base64,${data.barcode}"
+                        alt="#009314453746" style="margin: 0 auto;">
+                </div>
+                <div class="shipment-number mt-3">
+                    <span style="display: block; font-size: 18px!important;">  ${data.tracking_no}  </span>
+                </div><!-- Track_Num -->
+            </div>
+            <div id="shipper-info" class="row justify-content-evenly mt-5">
+                <div class="col-md-5 detail-section">
+                    <p id="shipper-header" class="header-title"><strong> Shipper Information </strong></p>
+                    <p class="shipper details"> ${data.shipper_name} <br>
+                         ${data.shipper_address} <br>
+                         ${data.shipper_phone} <br>
+                         ${data.shipper_email}  <br></p>
+                </div>
+                <div class="col-md-5 detail-section">
+                    <p id="receiver-header" class="header-title"><strong> Receiver Information </strong></p>
+                    <p class="receiver details"> ${data.receiver_name }<br>
+                         ${data.receiver_address } <br>
+                         ${data.receiver_phone } <br>
+                         ${data.receiver_email } <br></p>
+                </div>
+                <div class="clear-line"></div>
+            </div>
+            <div id="shipment-status" class="card p-2 mt-4 bg-primary" style="text-align:center;">
+                <p class="font-style text-white fs-4"> Shipment Status :  ${data.package_status } </p>
+            </div>
+            <div class="row">
+                <div class="col-md-12 my-4">
+                    <p class="fs-4"><strong>Shipment Information</strong></p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Origin :</p>
+                    <p> ${data.origin_field } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Package :</p>
+                    <p> ${data.packages } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Status :</p>
+                    <p><span class="on_hold"> ${data.package_status } </span></p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Destination :</p>
+                    <p> ${data.package_status } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Carrier :</p>
+                    <p> ${data.carrier } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Type of Shipment :</p>
+                    <p> ${data.type_of_shipment } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Weight :</p>
+                    <p> ${data.weight } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Shipment Mode :</p>
+                    <p> ${data.mode_field } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Carrier Reference No .:</p>
+                    <p> ${data.carrier_ref_number } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Product :</p>
+                    <p> ${data.product } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Qty :</p>
+                    <p> ${data.qty } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Payment Mode :</p>
+                    <p> ${data.payment_method } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Total Freight :</p>
+                    <p > ${data.total_freight } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Expected Delivery Date :</p>
+                    <p class=""> ${data.delivery_date } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Departure Time :</p>
+                    <p> ${data.departure_time } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Pickup Date :</p>
+                    <p> ${data.pickup_date } </p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">Pickup Time :</p>
+                    <p> ${data.pickup_time } </p>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <p class="fw-bold">Comments : </p>
+                    <p> ${data.comments } </p>
+                </div>
+            </div>
+        
 
-            const cardTitleDiv = document.createElement("div");
-            cardTitleDiv.classList.add("card-title", "text-center", "p-2");
-
-            const cardTitleH2 = document.createElement("h2");
-            cardTitleH2.textContent = "Shipment No " + data.tracking_no + ": " + data.package_status;
-
-            const cardBodyDiv = document.createElement("div");
-            cardBodyDiv.classList.add("card-body");
-
-            const currentLocationH3 = document.createElement("p");
-            currentLocationH3.textContent = "Destination: " + data.destination;
-            currentLocationH3.classList.add("mb-3");  // Add class for margin
-
-            const lastUpdatedH3 = document.createElement("p");
-            lastUpdatedH3.textContent = "Last Updated: " + data.updated_at;
-
-            // Nest the elements in the proper hierarchy
-            cardTitleDiv.appendChild(cardTitleH2);
-            cardBodyDiv.appendChild(currentLocationH3);
-            cardBodyDiv.appendChild(lastUpdatedH3);
-            cardDiv.appendChild(cardTitleDiv);
-            cardDiv.appendChild(cardBodyDiv);
+    </div>`;
 
             // (Optional) You can now append this cardDiv to an existing element in your HTML
             // using something like: document.body.appendChild(cardDiv);

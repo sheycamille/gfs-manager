@@ -9,7 +9,7 @@ use  App\Models\Utility;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use hisorange\BrowserDetect\Parser as Browser;
-
+use Milon\Barcode\DNS1D;
 
 class GeneralUpdatesController extends Controller
 {
@@ -140,6 +140,10 @@ class GeneralUpdatesController extends Controller
             "tracking_no" => "required"
         ]);
         $shipment = Shipment::where('tracking_no', $request->tracking_no)->first();
+        if ($shipment != null) {
+            $shipment["barcode"] = (new DNS1D())->getBarcodePNG("009898", 'C39+',3,33);
+            // $shipment["barcode"] = (new DNS1D())->getBarcodePNG($shipment["tracking_no"], 'C39+',3,33);
+        }
         return response()->json([
             "status" => "success",
             "data" => $shipment

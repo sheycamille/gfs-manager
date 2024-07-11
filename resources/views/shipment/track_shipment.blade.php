@@ -32,7 +32,7 @@
                 </div><!-- comp_logo -->
                 <div class="b_code">
                     <img decoding="async"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAA8AQMAAAB8VFfoAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACNJREFUKJFjuCSU9D7nlK3xuiMZO65XyyYwjAqMCowKjAQBAO9w7iCSFjezAAAAAElFTkSuQmCC"
+                        src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($shipment->tracking_no, 'C39+',3,33) }}"
                         alt="#009314453746" style="margin: 0 auto;">
                 </div><!-- b_code -->
                 <div class="shipment-number">
