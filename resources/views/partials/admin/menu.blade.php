@@ -874,7 +874,7 @@
                         @can('manage complaint')
                             <li
                                 class="dash-item {{ Request::route()->getName() == 'legal.dispute'  ? ' active' : '' }}">
-                                <a class="dash-link" href="{{ route('legal.dispute') }}">{{ __('Dispute Management') }}</a>
+                                <a class="dash-link" href="{{ route('disputes.index') }}">{{ __('Dispute Management') }}</a>
                             </li>
 
                         @endcan

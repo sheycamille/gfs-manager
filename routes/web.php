@@ -1602,7 +1602,7 @@ Route::group(
 
 //Legal Management 
 Route::get('insurance-management', [LegalManagementController::class, 'insuranceManagement'])->name('legal.insurance')->middleware(['auth', 'XSS']);
-Route::get('dispute-management', [LegalManagementController::class, 'disputeManagement'])->name('legal.dispute')->middleware(['auth', 'XSS']);
+// Route::get('dispute-management', [LegalManagementController::class, 'disputeManagement'])->name('legal.dispute')->middleware(['auth', 'XSS']);
 
 
 //Shipment Section
@@ -1651,3 +1651,40 @@ Route::controller(EmployeeDocumentController::class)->group(function () {
     });
     
 });
+
+// disputes
+Route::controller(LegalManagementController::class)->group(function () {
+    Route::prefix("legal-disputes")->group(function () {
+        Route::get("/","disputes")->name("disputes.index");
+        // Route::get("/{id}","show")->name("employee-documents.show");
+        Route::get("/{id}/edit","editDispute")->name("disputes.edit");
+        Route::post("/{id}/update","updateDispute")->name("disputes.update");
+        Route::post("/store","storeDispute")->name("disputes.store");
+        Route::get("/create","createDispute")->name("disputes.create");
+        Route::delete("/{id}/destroyDispute","destroy")->name("disputes.destroy");
+
+        // resources
+        Route::get("/{id}/resource/create","createDisputeResource")->name("disputes.resource.create");
+        Route::get("/{id}/procedure/create","createDisputeProcedure")->name("disputes.procedure.create");
+        Route::get("/{id}/handler/create","createDisputeHandler")->name("disputes.handler.create");
+        Route::get("/{id}/consultants/create","createDisputeConsultant")->name("disputes.consultants.create");
+
+        Route::post("/{id}/resource/create","storeDisputeResource")->name("disputes.resource.store");
+        Route::post("/{id}/procedure/create","storeDisputeProcedure")->name("disputes.procedure.store");
+        Route::post("/{id}/handler/create","storeDisputeHandler")->name("disputes.handler.store");
+        Route::post("/{id}/consultants/create","storeDisputeConsultant")->name("disputes.consultants.store");
+        
+    });
+    // Route::prefix("employee-document-types")->group(function () {
+    //     Route::get("/","employeeDocumentTypes")->name("employee-document-types.index");
+    //     // Route::get("/{id}","show")->name("employee-documents.show");
+    //     Route::get("/{id}/edit","employeeDocumentTypeEdit")->name("employee-document-types.edit");
+    //     Route::post("/{id}/update","employeeDocumentTypeUpdate")->name("employee-document-types.update");
+    //     Route::post("/store","employeeDocumentTypeStore")->name("employee-document-types.store");
+    //     Route::get("/create","employeeDocumentTypeCreate")->name("employee-document-types.create");
+    //     Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
+    // });
+    
+});
+
+

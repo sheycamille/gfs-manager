@@ -14,6 +14,7 @@ use Spatie\GoogleCalendar\Event as GoogleEvent;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Twilio\Rest\Client;
+use \Illuminate\Http\UploadedFile;
 
 class Utility extends Model
 {
@@ -5033,5 +5034,15 @@ class Utility extends Model
             }
         }
         return $totalArr;
+    }
+
+    public static function uploadFile(UploadedFile $file, $directory)
+    {
+        $filenameWithExt = $file->getClientOriginalName();
+        $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $img_name=$filename."_".uniqid().'.'.$ext;
+        $file->move(public_path('/uploads/'.$directory),$img_name);
+        return '/uploads/'.$directory."/".$img_name;
     }
 }
