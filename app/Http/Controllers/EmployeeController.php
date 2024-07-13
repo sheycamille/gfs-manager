@@ -106,6 +106,7 @@ class EmployeeController extends Controller
                     [
                         'name' => $request['name'],
                         'email' => $request['email'],
+                        'phone' => $request['phone'],
                         // 'gender'=>$request['gender'],
                         'password' => Hash::make($request['password']),
                         'type' => 'employee',

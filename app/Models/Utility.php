@@ -14,6 +14,7 @@ use Spatie\GoogleCalendar\Event as GoogleEvent;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Twilio\Rest\Client;
+use \Illuminate\Http\UploadedFile;
 
 class Utility extends Model
 {
@@ -77,6 +78,7 @@ class Utility extends Model
             "site_date_format" => "M j, Y",
             "site_time_format" => "g:i A",
             "company_name" => "",
+            "company_name_abbrev" => "",
             "company_address" => "",
             "company_city" => "",
             "company_state" => "",
@@ -268,6 +270,7 @@ class Utility extends Model
             "site_date_format" => "M j, Y",
             "site_time_format" => "g:i A",
             "company_name" => "",
+            "company_name_abbrev" => "",
             "company_address" => "",
             "company_city" => "",
             "company_state" => "",
@@ -2405,6 +2408,7 @@ class Utility extends Model
         $arrVariable = [
             '{app_name}',
             '{company_name}',
+            '{company_name_abbrev}',
             '{app_url}',
             '{email}',
             '{password}',
@@ -2536,6 +2540,7 @@ class Utility extends Model
         $arrValue = [
             'app_name' => '-',
             'company_name' => '-',
+            'company_name_abbrev' => '-',
             'app_url' => '-',
             'email' => '-',
             'password' => '-',
@@ -5029,5 +5034,15 @@ class Utility extends Model
             }
         }
         return $totalArr;
+    }
+
+    public static function uploadFile(UploadedFile $file, $directory)
+    {
+        $filenameWithExt = $file->getClientOriginalName();
+        $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $img_name=$filename."_".uniqid().'.'.$ext;
+        $file->move(public_path('/uploads/'.$directory),$img_name);
+        return '/uploads/'.$directory."/".$img_name;
     }
 }

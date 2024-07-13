@@ -193,7 +193,8 @@ class User extends Authenticatable
     {
         $settings = Utility::settings();
 
-        return $settings["contract_prefix"] . sprintf("%05d", $number);
+        return $settings["contract_prefix"].$settings["company_name_abbrev"] .date("Y"). sprintf("%05d", $number);
+        // return $settings["contract_prefix"] . sprintf("%05d", $number);
     }
 
     public function billNumberFormat($number)

@@ -104,6 +104,7 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RazorpayPaymentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\EmployeeContractTemplatesController;
 use App\Http\Controllers\ResignationController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\RoleController;
@@ -141,6 +142,7 @@ use App\Http\Controllers\NepalstePaymnetController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\EmployeeContractManagementController;
+use App\Http\Controllers\EmployeeDocumentController;
 
 use App\Http\Controllers\Updates\GeneralUpdatesController;
 
@@ -189,7 +191,7 @@ Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('
 Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVerification'])->name('otp-verification')->middleware('auth');
 Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
 Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth','throttle:5,30']);
-
+Route::get("/tracking",[GeneralUpdatesController::class, "tracking"])->name("customer.tracking.page");
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
 // Route::get('/password/resets/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('change.langPass');
@@ -1147,7 +1149,20 @@ Route::group(
         ],
     ], function () {
         Route::get('emplooyees/contract/{id}/description', [EmployeeContractManagementController::class, 'description'])->name('employee.contract.description');
-        Route::resource('employees/contract', EmployeeContractManagementController::class,["names" => "employees.contract"]);
+        Route::get('employees/contract', [EmployeeContractManagementController::class, 'index'])->name("employees.contract.index");
+        Route::get('employees/contract/create', [EmployeeContractManagementController::class, 'create'])->name("employees.contract.create");
+        Route::get('employees/contract/{id}/edit', [EmployeeContractManagementController::class, 'edit'])->name("employees.contract.edit");
+        Route::post('employees/contract/{id}/update', [EmployeeContractManagementController::class, 'update'])->name("employees.contract.update");
+        Route::delete('employees/contract/{id}/destroy', [EmployeeContractManagementController::class, 'destroy'])->name("employees.contract.destroy");
+        Route::post('employees/contract/store', [EmployeeContractManagementController::class, 'store'])->name("employees.contract.store");
+        
+        // employee contract templates
+        Route::get('employees/contract/template', [EmployeeContractTemplatesController::class, 'index'])->name("employee.contract.template.index");
+        Route::get('employees/contract/template/create', [EmployeeContractTemplatesController::class, 'create'])->name("employee.contract.template.create");
+        Route::get('employees/contract/template/{id}/edit', [EmployeeContractTemplatesController::class, 'edit'])->name("employee.contract.template.edit");
+        Route::post('employees/contract/template/{id}/update', [EmployeeContractTemplatesController::class, 'update'])->name("employee.contract.template.update");
+        Route::delete('employees/contract/template/{id}/destroy', [EmployeeContractTemplatesController::class, 'destroy'])->name("employee.contract.template.destroy");
+        Route::post('employees/contract/template/store', [EmployeeContractTemplatesController::class, 'store'])->name("employee.contract.template.store");
     }
 );
 
@@ -1587,7 +1602,7 @@ Route::group(
 
 //Legal Management 
 Route::get('insurance-management', [LegalManagementController::class, 'insuranceManagement'])->name('legal.insurance')->middleware(['auth', 'XSS']);
-Route::get('dispute-management', [LegalManagementController::class, 'disputeManagement'])->name('legal.dispute')->middleware(['auth', 'XSS']);
+// Route::get('dispute-management', [LegalManagementController::class, 'disputeManagement'])->name('legal.dispute')->middleware(['auth', 'XSS']);
 
 
 //Shipment Section
@@ -1613,4 +1628,63 @@ Route::get('posts', [MarketingManagementcontroller::class, 'allPost'])->name('po
 Route::get('post/create', [MarketingManagementcontroller::class, 'createPost'])->name('post.create')->middleware(['auth', 'XSS']);
 Route::get('categories', [MarketingManagementcontroller::class, 'allCategoty'])->name('category.all')->middleware(['auth', 'XSS']);
 Route::get('category/create', [MarketingManagementcontroller::class, 'createCategories'])->name('category.create')->middleware(['auth', 'XSS']);
+
+// employee documents management
+Route::controller(EmployeeDocumentController::class)->group(function () {
+    Route::prefix("employee-documents")->group(function () {
+        Route::get("/","index")->name("employee-documents.index");
+        // Route::get("/{id}","show")->name("employee-documents.show");
+        Route::get("/{id}/edit","edit")->name("employee-documents.edit");
+        Route::post("/{id}/update","update")->name("employee-documents.update");
+        Route::post("/store","store")->name("employee-documents.store");
+        Route::get("/create","create")->name("employee-documents.create");
+        Route::delete("/{id}/destroy","destroy")->name("employee-documents.destroy");
+    });
+    Route::prefix("employee-document-types")->group(function () {
+        Route::get("/","employeeDocumentTypes")->name("employee-document-types.index");
+        // Route::get("/{id}","show")->name("employee-documents.show");
+        Route::get("/{id}/edit","employeeDocumentTypeEdit")->name("employee-document-types.edit");
+        Route::post("/{id}/update","employeeDocumentTypeUpdate")->name("employee-document-types.update");
+        Route::post("/store","employeeDocumentTypeStore")->name("employee-document-types.store");
+        Route::get("/create","employeeDocumentTypeCreate")->name("employee-document-types.create");
+        Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
+    });
+    
+});
+
+// disputes
+Route::controller(LegalManagementController::class)->group(function () {
+    Route::prefix("legal-disputes")->group(function () {
+        Route::get("/","disputes")->name("disputes.index");
+        // Route::get("/{id}","show")->name("employee-documents.show");
+        Route::get("/{id}/edit","editDispute")->name("disputes.edit");
+        Route::post("/{id}/update","updateDispute")->name("disputes.update");
+        Route::post("/store","storeDispute")->name("disputes.store");
+        Route::get("/create","createDispute")->name("disputes.create");
+        Route::delete("/{id}/destroyDispute","destroy")->name("disputes.destroy");
+
+        // resources
+        Route::get("/{id}/resource/create","createDisputeResource")->name("disputes.resource.create");
+        Route::get("/{id}/procedure/create","createDisputeProcedure")->name("disputes.procedure.create");
+        Route::get("/{id}/handler/create","createDisputeHandler")->name("disputes.handler.create");
+        Route::get("/{id}/consultants/create","createDisputeConsultant")->name("disputes.consultants.create");
+
+        Route::post("/{id}/resource/create","storeDisputeResource")->name("disputes.resource.store");
+        Route::post("/{id}/procedure/create","storeDisputeProcedure")->name("disputes.procedure.store");
+        Route::post("/{id}/handler/create","storeDisputeHandler")->name("disputes.handler.store");
+        Route::post("/{id}/consultants/create","storeDisputeConsultant")->name("disputes.consultants.store");
+        
+    });
+    // Route::prefix("employee-document-types")->group(function () {
+    //     Route::get("/","employeeDocumentTypes")->name("employee-document-types.index");
+    //     // Route::get("/{id}","show")->name("employee-documents.show");
+    //     Route::get("/{id}/edit","employeeDocumentTypeEdit")->name("employee-document-types.edit");
+    //     Route::post("/{id}/update","employeeDocumentTypeUpdate")->name("employee-document-types.update");
+    //     Route::post("/store","employeeDocumentTypeStore")->name("employee-document-types.store");
+    //     Route::get("/create","employeeDocumentTypeCreate")->name("employee-document-types.create");
+    //     Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
+    // });
+    
+});
+
 

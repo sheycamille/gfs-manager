@@ -11,7 +11,7 @@
 @section('action-btn')
     <div class="float-end">
         @if(\Auth::user()->type == 'company')
-            <a href="#" data-size="md" data-url="{{ route('employees.contract.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Contract')}}" class="btn btn-sm btn-primary">
+            <a href="{{ route('employees.contract.create') }}" class="btn btn-sm btn-primary">
                 <i class="ti ti-plus"></i>
             </a>
         @endif
@@ -28,15 +28,12 @@
                             <thead>
                             <tr>
                                 <th scope="col">{{__('#')}}</th>
-                                <th scope="col">{{__('Subject')}}</th>
-                                @if(\Auth::user()->type!='client')
-                                    <th scope="col">{{__('Client')}}</th>
-                                @endif
-
+                                <th scope="col">{{__('Employee')}}</th>
                                 <th scope="col">{{__('Contract Type')}}</th>
                                 <th scope="col">{{__('Contract Value')}}</th>
                                 <th scope="col">{{__('Start Date')}}</th>
                                 <th scope="col">{{__('End Date')}}</th>
+                                <th scope="col">{{__('Status')}}</th>
                                 <th scope="col" >{{__('Action')}}</th>
 
                             </tr>
@@ -48,53 +45,67 @@
                                         <td>
                                             <a href="{{route('contract.show',$contract->id)}}" class="btn btn-outline-primary">{{\Auth::user()->contractNumberFormat($contract->id)}}</a>
                                         </td>
-                                        <td>{{ $contract->subject}}</td>
-                                        @if(\Auth::user()->type!='client')
-                                            <td>{{ !empty($contract->clients)?$contract->clients->name:'-' }}</td>
-                                        @endif
-                                        <td>{{ !empty($contract->projects)?$contract->projects->project_name:'-' }}</td>
-
-                                        <td>{{ !empty($contract->types)?$contract->types->name:'' }}</td>
-                                        <td>{{ \Auth::user()->priceFormat($contract->value) }}</td>
+                                        <td>{{ $contract->employee->name}}</td>
+                                        <td>{{ $contract->contractType->name}}</td>
+                                        <td>{{ \Auth::user()->priceFormat($contract->contract_value) }}</td>
                                         <td>{{  \Auth::user()->dateFormat($contract->start_date )}}</td>
                                         <td>{{  \Auth::user()->dateFormat($contract->end_date )}}</td>
-                                        {{--                                    <td>--}}
-                                        {{--                                        <a href="#" class="action-item" data-url="{{ route('contract.description',$contract->id) }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Desciption')}}" data-title="{{__('Desciption')}}"><i class="fa fa-comment"></i></a>--}}
-                                        {{--                                    </td>--}}
+                                        <td>
+                                            @switch($contract->status)
+                                                @case("accept")
+                                                    <span class="badge bg-success">
+                                                    @break
+                                                @case("suspended")
+                                                    <span class="badge bg-danger">
+                                                    @break
+                                                @case("pending")
+                                                    <span class="badge bg-warning">
+                                                    @break
+                                                
+                                                @default
+                                                    
+                                            @endswitch
+                                                {{$contract->status}}
+                                            </span>
+                                        </td>
 
                                         <td class="action ">
                                             @if(\Auth::user()->type=='company')
                                                 @if($contract->status=='accept')
                                                     <div class="action-btn bg-primary ms-2">
-                                                        <a href="#" data-size="lg"
-                                                        data-url="{{ route('contract.copy', $contract->id) }}"
-                                                        data-ajax-popup="true"
-                                                        data-title="{{ __('Copy Contract') }}"
+                                                        <a href="{{ url('/employees/contract/'.$contract->id.'/edit?type=duplicate') }}"
                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        title="{{ __('Duplicate') }}"><i
+                                                        ><i
                                                                 class="ti ti-copy text-white"></i>
                                                         </a>
                                                     </div>
                                                 @endif
                                             @endif
-                                            @can('show contract')
+                                            @if($contract->file != null)
+                                                <div class="action-btn bg-primary ms-2">
+                                                    <a class="mx-3 btn btn-sm align-items-center"
+                                                    href="{{ $contract->file }}" download>
+                                                        <i class="ti ti-download text-white"></i>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                            {{-- @can('show contract')
                                                 <div class="action-btn bg-warning ms-2">
-                                                    <a href="{{ route('contract.show',$contract->id) }}"
+                                                    <a href="{{ route('employees.contract.show',$contract->id) }}"
                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                     data-bs-whatever="{{__('View Budget Planner')}}" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{__('View')}}"> <span class="text-white"> <i class="ti ti-eye"></i></span></a>
                                                 </div>
-                                            @endcan
+                                            @endcan --}}
                                             @can('edit contract')
                                                 <div class="action-btn bg-info ms-2">
-                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-url="{{ route('contract.edit',$contract->id) }}" data-ajax-popup="true" data-size="md" data-bs-toggle="tooltip" title="{{__('Edit')}}" data-title="{{__('Edit Contract')}}">
+                                                    <a href="{{ route('employees.contract.edit',$contract->id) }}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
                                                         <i class="ti ti-pencil text-white"></i>
                                                     </a></div>
                                             @endcan
                                             @can('delete contract')
                                                 <div class="action-btn bg-danger ms-2">
-                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['contract.destroy', $contract->id]]) !!}
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['employees.contract.destroy', $contract->id]]) !!}
                                                     <a href="#" class="mx-3 btn btn-sm  align-items-center bs-pass-para" data-bs-toggle="tooltip" title="{{__('Delete')}}"><i class="ti ti-trash text-white"></i></a>
                                                     {!! Form::close() !!}
                                                 </div>

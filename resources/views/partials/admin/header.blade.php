@@ -1,3 +1,11 @@
+<style>
+    .overme {
+        width: 50%;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+    }
+</style>
 @php
     $users=\Auth::user();
     // $profiles=asset(Storage::url('uploads/avatar/'));
@@ -20,15 +28,15 @@
 {{--<header class="dash-header  {{(isset($mode_setting['cust_theme_bg']) && $mode_setting['cust_theme_bg'] == 'on')?'transprent-bg':''}}">--}}
 
 @if (isset($setting['cust_theme_bg']) && $setting['cust_theme_bg'] == 'on')
-    <header class="dash-header transprent-bg">
-        @else
-            <header class="dash-header">
-                @endif
+    <header class="dash-header transprent-bg container" style="max-width:82%">
+@else
+    <header class="dash-header container" style="max-width:82%">
+@endif
 
     <div class="header-wrapper">
             <div class="me-auto dash-mob-drp">
                 <div class="row align-items-center">
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 d-none d-md-block">
                         <a href="#" class="text-muted">
                             <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2H20" stroke="#737791" stroke-width="3" stroke-linecap="round"/>
@@ -44,19 +52,19 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            <input class="form-control border-end-0 border" type="text" placeholder="Search ..." id="example-search-input">
+                            <input class="form-control border-end-0 border" type="text" placeholder="Search anything,files, documents, task " id="example-search-input">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="me-auto dash-mob-drp">
+            <div class="me-auto dash-mob-drp d-none d-md-block">
                 <div class="list-unstyled header-clock py-o">
                     <li>
                         <svg class="clock" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>                          
                     </li>
-                    <li class="">
+                    <li class="d-none d-xl-block">
                         <div class="mx-2">
                             <p class="text-sm p-0 m-0">
                                 <span class="text">
@@ -71,10 +79,14 @@
                         </div>
                     </li>
                     <li class="px-3">
-                        <a href="#" class="text-muted position-relative">
-                            <i class="fa-regular fa-bell fa-2x text-dark"></i>  
-                            <span class="position-absolute top--3 start-100 translate-middle badge rounded-pill bg-primary text-sm">
-                              3+
+                        <a href="#" class="text-muted position-relative" data-bs-toggle="tooltip" data-bs-placement="top" title="new">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.062 15.4613C17.5263 14.9837 17.0572 14.4362 16.6675 13.8335C16.2421 13.0016 15.9871 12.0931 15.9175 11.1613V8.41688C15.9212 6.95333 15.3903 5.53881 14.4246 4.43909C13.4589 3.33937 12.1248 2.63014 10.6731 2.44466V1.72799C10.6731 1.53129 10.595 1.34265 10.4559 1.20356C10.3168 1.06447 10.1281 0.986328 9.93142 0.986328C9.73472 0.986328 9.54608 1.06447 9.40699 1.20356C9.2679 1.34265 9.18976 1.53129 9.18976 1.72799V2.45577C7.75101 2.65462 6.43307 3.36814 5.48005 4.46416C4.52703 5.56019 4.0035 6.96446 4.00642 8.41688V11.1613C3.93684 12.0931 3.68186 13.0016 3.25642 13.8335C2.87358 14.4349 2.41209 14.9823 1.8842 15.4613C1.82494 15.5134 1.77745 15.5775 1.74488 15.6493C1.71231 15.7212 1.69541 15.7991 1.69531 15.878V16.6335C1.69531 16.7809 1.75384 16.9222 1.85803 17.0264C1.96222 17.1306 2.10353 17.1891 2.25087 17.1891H17.6953C17.8427 17.1891 17.984 17.1306 18.0882 17.0264C18.1923 16.9222 18.2509 16.7809 18.2509 16.6335V15.878C18.2508 15.7991 18.2339 15.7212 18.2013 15.6493C18.1687 15.5775 18.1212 15.5134 18.062 15.4613ZM2.85087 16.078C3.36776 15.5787 3.82287 15.0191 4.20642 14.4113C4.74232 13.4066 5.055 12.298 5.12309 11.1613V8.41688C5.10106 7.76579 5.21027 7.11693 5.44423 6.50892C5.67818 5.90092 6.0321 5.34621 6.48489 4.87783C6.93769 4.40945 7.48011 4.03698 8.07986 3.78259C8.6796 3.52821 9.3244 3.39711 9.97587 3.39711C10.6273 3.39711 11.2721 3.52821 11.8719 3.78259C12.4716 4.03698 13.014 4.40945 13.4668 4.87783C13.9196 5.34621 14.2736 5.90092 14.5075 6.50892C14.7415 7.11693 14.8507 7.76579 14.8286 8.41688V11.1613C14.8967 12.298 15.2094 13.4066 15.7453 14.4113C16.1289 15.0191 16.584 15.5787 17.1009 16.078H2.85087Z" fill="black"/>
+                                <path d="M10.0006 19.044C10.3506 19.036 10.6864 18.9044 10.9487 18.6726C11.211 18.4408 11.3829 18.1237 11.4339 17.7773H8.51172C8.5642 18.1331 8.74412 18.4576 9.018 18.6906C9.29188 18.9236 9.64107 19.0492 10.0006 19.044Z" fill="black"/>
+                            </svg>
+                                 
+                            <span class="position-absolute start-100 translate-middle badge rounded-pill bg-primary text-xs mt-4 ml-3">
+                              3
                               <span class="visually-hidden">unread messages</span>
                             </span>
                         </a>
@@ -85,7 +97,7 @@
             
             <div class="ms-auto header-right">
                 <ul class="list-unstyled">
-                    <li class=" d-flex align-items-center">
+                    <li class=" d-flex align-items-center d-none d-md-block mt-4">
                         <a href="#">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 13H4C3.73478 13 3.48043 13.1054 3.29289 13.2929C3.10536 13.4804 3 13.7348 3 14V20C3 20.2652 3.10536 20.5196 3.29289 20.7071C3.48043 20.8946 3.73478 21 4 21H10C10.2652 21 10.5196 20.8946 10.7071 20.7071C10.8946 20.5196 11 20.2652 11 20V14C11 13.7348 10.8946 13.4804 10.7071 13.2929C10.5196 13.1054 10.2652 13 10 13ZM9 19H5V15H9V19ZM20 3H14C13.7348 3 13.4804 3.10536 13.2929 3.29289C13.1054 3.48043 13 3.73478 13 4V10C13 10.2652 13.1054 10.5196 13.2929 10.7071C13.4804 10.8946 13.7348 11 14 11H20C20.2652 11 20.5196 10.8946 20.7071 10.7071C20.8946 10.5196 21 10.2652 21 10V4C21 3.73478 20.8946 3.48043 20.7071 3.29289C20.5196 3.10536 20.2652 3 20 3ZM19 9H15V5H19V9ZM20 16H18V14C18 13.7348 17.8946 13.4804 17.7071 13.2929C17.5196 13.1054 17.2652 13 17 13C16.7348 13 16.4804 13.1054 16.2929 13.2929C16.1054 13.4804 16 13.7348 16 14V16H14C13.7348 16 13.4804 16.1054 13.2929 16.2929C13.1054 16.4804 13 16.7348 13 17C13 17.2652 13.1054 17.5196 13.2929 17.7071C13.4804 17.8946 13.7348 18 14 18H16V20C16 20.2652 16.1054 20.5196 16.2929 20.7071C16.4804 20.8946 16.7348 21 17 21C17.2652 21 17.5196 20.8946 17.7071 20.7071C17.8946 20.5196 18 20.2652 18 20V18H20C20.2652 18 20.5196 17.8946 20.7071 17.7071C20.8946 17.5196 21 17.2652 21 17C21 16.7348 20.8946 16.4804 20.7071 16.2929C20.5196 16.1054 20.2652 16 20 16ZM10 3H4C3.73478 3 3.48043 3.10536 3.29289 3.29289C3.10536 3.48043 3 3.73478 3 4V10C3 10.2652 3.10536 10.5196 3.29289 10.7071C3.48043 10.8946 3.73478 11 4 11H10C10.2652 11 10.5196 10.8946 10.7071 10.7071C10.8946 10.5196 11 10.2652 11 10V4C11 3.73478 10.8946 3.48043 10.7071 3.29289C10.5196 3.10536 10.2652 3 10 3ZM9 9H5V5H9V9Z" fill="black"/>
@@ -97,18 +109,21 @@
                         </a>
                     </li>
                     @if( \Auth::user()->type !='client' && \Auth::user()->type !='super admin' )
-                            <li class="dropdown dash-h-item drp-notification">
-                                <a class="dash-head-link arrow-none me-0" href="{{ url('chats') }}" aria-haspopup="false"
-                                aria-expanded="false">
-                                    <i class="ti ti-brand-hipchat"></i>
-                                    <span class="bg-danger dash-h-badge message-toggle-msg  message-counter custom_messanger_counter beep"> {{ $unseenCounter }}<span
-                                            class="sr-only"></span></span>
+                            <li class="dropdown dash-h-item drp-notification d-none d-md-block mt-3">
+                                <a class="dash-head-link arrow-none me-0 position-relative" href="{{ url('chats') }}" aria-haspopup="false"
+                                aria-expanded="false" style="background-color: rgba(255, 92, 1, 0.08);">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.062 15.4613C17.5263 14.9837 17.0572 14.4362 16.6675 13.8335C16.2421 13.0016 15.9871 12.0931 15.9175 11.1613V8.41688C15.9212 6.95333 15.3903 5.53881 14.4246 4.43909C13.4589 3.33937 12.1248 2.63014 10.6731 2.44466V1.72799C10.6731 1.53129 10.595 1.34265 10.4559 1.20356C10.3168 1.06447 10.1281 0.986328 9.93142 0.986328C9.73472 0.986328 9.54608 1.06447 9.40699 1.20356C9.2679 1.34265 9.18976 1.53129 9.18976 1.72799V2.45577C7.75101 2.65462 6.43307 3.36814 5.48005 4.46416C4.52703 5.56019 4.0035 6.96446 4.00642 8.41688V11.1613C3.93684 12.0931 3.68186 13.0016 3.25642 13.8335C2.87358 14.4349 2.41209 14.9823 1.8842 15.4613C1.82494 15.5134 1.77745 15.5775 1.74488 15.6493C1.71231 15.7212 1.69541 15.7991 1.69531 15.878V16.6335C1.69531 16.7809 1.75384 16.9222 1.85803 17.0264C1.96222 17.1306 2.10353 17.1891 2.25087 17.1891H17.6953C17.8427 17.1891 17.984 17.1306 18.0882 17.0264C18.1923 16.9222 18.2509 16.7809 18.2509 16.6335V15.878C18.2508 15.7991 18.2339 15.7212 18.2013 15.6493C18.1687 15.5775 18.1212 15.5134 18.062 15.4613ZM2.85087 16.078C3.36776 15.5787 3.82287 15.0191 4.20642 14.4113C4.74232 13.4066 5.055 12.298 5.12309 11.1613V8.41688C5.10106 7.76579 5.21027 7.11693 5.44423 6.50892C5.67818 5.90092 6.0321 5.34621 6.48489 4.87783C6.93769 4.40945 7.48011 4.03698 8.07986 3.78259C8.6796 3.52821 9.3244 3.39711 9.97587 3.39711C10.6273 3.39711 11.2721 3.52821 11.8719 3.78259C12.4716 4.03698 13.014 4.40945 13.4668 4.87783C13.9196 5.34621 14.2736 5.90092 14.5075 6.50892C14.7415 7.11693 14.8507 7.76579 14.8286 8.41688V11.1613C14.8967 12.298 15.2094 13.4066 15.7453 14.4113C16.1289 15.0191 16.584 15.5787 17.1009 16.078H2.85087Z" fill="black"/>
+                                        <path d="M10.0006 19.044C10.3506 19.036 10.6864 18.9044 10.9487 18.6726C11.211 18.4408 11.3829 18.1237 11.4339 17.7773H8.51172C8.5642 18.1331 8.74412 18.4576 9.018 18.6906C9.29188 18.9236 9.64107 19.0492 10.0006 19.044Z" fill="black"/>
+                                    </svg>
+                                        
+                                    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-primary text-xs mt-4 mr-3"></span>
                                 </a>
 
                             </li>
                         @endif
 
-                        <li class="dropdown dash-h-item drp-language">
+                        <li class="dropdown dash-h-item drp-language d-none d-md-block mt-3">
                         <a
                             class="dash-head-link dropdown-toggle arrow-none me-0"
                             data-bs-toggle="dropdown"
@@ -177,7 +192,7 @@
 
                     <li class="dropdown dash-h-item drp-company">
                         <a
-                            class="dash-head-link dropdown-toggle arrow-none me-0"
+                            class="dash-head-link dropdown-toggle arrow-none me-0 position-relative"
                             data-bs-toggle="dropdown"
                             href="#"
                             role="button"
@@ -187,10 +202,13 @@
                             <span class="theme-avtar">
                                 <img src="{{ !empty(\Auth::user()->avatar) ? $profile .'/'. \Auth::user()->avatar :  $defaultProfile.'/'.'avatar-1.jpg'}}" class="img-fluid rounded-circle">
                             </span>
-                            <span class="hide-mob ms-2">{{__('Hi, ')}}{{\Auth::user()->name }} !</span>
+                            <span class="hide-mob ms-2" >
+                                {{__('Hi, ')}}{{strlen(\Auth::user()->name) > 8? substr(\Auth::user()->name,0,8)."...": \Auth::user()->name  }} !
+                                <p class="text-xs text-muted text-center">S Admin: DG</p>
+                            </span>
                             <i class="ti ti-chevron-down drp-arrow nocolor hide-mob"></i>
                         </a>
-                        <div class="dropdown-menu dash-h-dropdown">
+                        <div class="dropdown-menu dash-h-dropdown position-absolute">
 
                             <!-- <a href="{{ route('change.mode') }}" class="dropdown-item">
                                 <i class="ti ti-circle-plus"></i>

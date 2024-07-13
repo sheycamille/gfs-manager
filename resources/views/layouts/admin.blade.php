@@ -96,7 +96,8 @@
     <!-- custom updates css -->
     <link rel="stylesheet" href="/assets/css/updates.css">
 </head>
-<body class="{{ $color }}">
+<body class="{{ $color }}" style="{{ $color == "theme-3"? "background-color: #F6F6F6 !important;":"" }}">
+{{-- <body class="{{ $color }}"> --}}
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
     <div class="loader-track">
@@ -204,7 +205,7 @@
 
 <!-- [ Main Content ] start -->
 <div class="dash-container">
-    <div class="dash-content">
+    <div class="dash-content position-relative">
         <div class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
@@ -223,6 +224,23 @@
             </div>
         </div>
     @yield('content')
+    <footer class="postion-absolute">
+            <div class="card" style="border-radius: 0;">
+                <div class="card-body row mx-auto pt-3 pb-1" >
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="text-muted text-underline mx-2">Terms <hr></a>
+                        <span class="text-muted mx-1">|</span>
+                        <a href="#" class="text-muted text-underline mx-2">Privacy <hr></a>
+                        <span class="text-muted mx-1">|</span>
+                        <a href="#" class="text-muted text-underline mx-2">Status <hr></a>
+                        <span class="text-muted mx-1">|</span>
+                        <a href="#" class="text-muted text-underline mx-2">Data <hr></a>
+    
+                    </div>
+                </div>
+            </div>
+    
+    </footer>
     <!-- [ Main Content ] end -->
     </div>
 </div>

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Updates;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use  App\Models\Utility;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use hisorange\BrowserDetect\Parser as Browser;
-
+use Milon\Barcode\DNS1D;
 
 class GeneralUpdatesController extends Controller
 {
@@ -127,5 +128,25 @@ class GeneralUpdatesController extends Controller
         $user->sent_login_verification_otp($otp);
 
         return redirect()->back()->with('message', "A new opt code has been sent to your email and phone number");
+    }
+
+    public function tracking() 
+    {
+        return view("customerShipmentTracking.tracking");
+    }
+
+    public function trackShipment(Request $request){
+        $request->validate([
+            "tracking_no" => "required"
+        ]);
+        $shipment = Shipment::where('tracking_no', $request->tracking_no)->first();
+        if ($shipment != null) {
+            $shipment["barcode"] = (new DNS1D())->getBarcodePNG("009898", 'C39+',3,33);
+            // $shipment["barcode"] = (new DNS1D())->getBarcodePNG($shipment["tracking_no"], 'C39+',3,33);
+        }
+        return response()->json([
+            "status" => "success",
+            "data" => $shipment
+        ]);
     }
 }

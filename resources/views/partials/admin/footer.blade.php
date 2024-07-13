@@ -4,16 +4,7 @@
 
 @endphp
 <!-- [ Main Content ] end -->
-<footer class="dash-footer">
-    <div class="footer-wrapper">
-        <div class="py-1">
-            <p class="mb-0 text-muted"> &copy;
-                {{ date('Y') }} {{ Utility::getValByName('footer_text') ? Utility::getValByName('footer_text') : config('app.name', 'ERPGo') }}
-            </p>
-        </div>
 
-    </div>
-</footer>
 
 <!-- Required Js -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
