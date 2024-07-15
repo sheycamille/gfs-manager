@@ -192,6 +192,7 @@ Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVe
 Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
 Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth','throttle:5,30']);
 Route::get("/tracking",[GeneralUpdatesController::class, "tracking"])->name("customer.tracking.page");
+Route::post("/tracking",[GeneralUpdatesController::class, "trackShipment"])->name("customer.tracking.search");
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
 // Route::get('/password/resets/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('change.langPass');

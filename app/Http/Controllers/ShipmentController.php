@@ -87,6 +87,75 @@ class ShipmentController extends Controller
         }
 
     }
+    
+    public function storeBk(Request $request)
+    {
+        $data = $request->validate([
+            "client_name" => "required",
+            "client_phone" => "required",
+            "client_address" => "required",
+            "client_email" => "required",
+            "pickup_address" => "required",
+            "destination_address" => "required",
+            "type_of_shipment" => "required",
+            "weight" => "required",
+            "mode_field" => "required",
+            "product" => "required",
+            "qty" => "required",
+            "payment_method" => "required",
+            "total_freight" => "required",
+            "carrier_field" => "required",
+            "carrier_ref_number" => "required",
+            "departure_time" => "required",
+            "origin_field" => "required",
+            "destination" => "required",
+            "pickup_date" => "required",
+            "pickup_time" => "required",
+            "delivery_date" => "required",
+            "comments" => "required",
+            "status_date" => "required",
+            "status_time" => "required",
+            "status_location" => "required",
+            "package_status" => "required",
+        ]);
+        try {
+            $num = 1;
+            $last_shipment = Shipment::orderBy("id","DESC")->first();
+            if ($last_shipment != null) {
+                $num = $last_shipment->id;
+            }
+
+
+            $data["tracking_no"] = "GFS".date("Y").str_pad($num,4,"0",STR_PAD_LEFT);
+            Shipment::create($data);
+
+            // $path = null;
+
+            // if ($request->hasFile('attach_file')) {
+
+            // $file = $request->file('attach_file');
+            // $itemRef = Str::uuid()->toString();
+            // $fileName = $itemRef.$file->getClientOriginalName();
+            // $file->move(public_path('/assets/images/shipment-files'), $fileName);
+
+            // $path = '/assets/images/shipment-files' . '/' . $fileName;
+            // }
+            
+            // // $shipment->tracking_no = $request->tracking_no;
+            // // $shipment->attach_file = $path;
+            // $shipment->save();
+
+    
+            return redirect()->back()->with('success', 'Successfully saved');
+
+        } catch (\Throwable $th) {
+            Log::error($th);
+
+            return redirect()->back()->with('error', 'An error occurred while saving the shipment');
+        }
+
+    }
+    
     public function edit($id){
         $id = Crypt::decrypt($id);
         $shipment = Shipment::findOrfail($id);
@@ -207,21 +276,14 @@ class ShipmentController extends Controller
 
             if($shipment){
 
-                return view('shipment.track_shipment',[
+                return view('shipment.tracking_details',[
                     'shipment' => $shipment
                 ]);
             }
            return redirect()->back()->with('error', 'No Tracking Result Found');
 
-        }else{
-
-            $shipment = Shipment::where('tracking_no', $request->tracking_no)->first();
-
-            return view('shipment.track_shipment',[
-                'shipment' =>$shipment
-            ]);
-
         }
+        return view('shipment.track_shipment');
     }
 
     public function dashboard(){

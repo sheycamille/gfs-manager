@@ -223,24 +223,26 @@
                 </div>
             </div>
         </div>
-    @yield('content')
-    <footer class="postion-absolute">
-            <div class="card" style="border-radius: 0;">
-                <div class="card-body row mx-auto pt-3 pb-1" >
-                    <div class="d-flex justify-content-center">
-                        <a href="#" class="text-muted text-underline mx-2">Terms <hr></a>
-                        <span class="text-muted mx-1">|</span>
-                        <a href="#" class="text-muted text-underline mx-2">Privacy <hr></a>
-                        <span class="text-muted mx-1">|</span>
-                        <a href="#" class="text-muted text-underline mx-2">Status <hr></a>
-                        <span class="text-muted mx-1">|</span>
-                        <a href="#" class="text-muted text-underline mx-2">Data <hr></a>
-    
+        <div class="content" style="min-height: 70vh">
+            @yield('content')
+        </div>
+        <footer class="postion-absolute">
+                <div class="card" style="border-radius: 0;">
+                    <div class="card-body row mx-auto pt-3 pb-1" >
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="text-muted text-underline mx-2">Terms <hr></a>
+                            <span class="text-muted mx-1">|</span>
+                            <a href="#" class="text-muted text-underline mx-2">Privacy <hr></a>
+                            <span class="text-muted mx-1">|</span>
+                            <a href="#" class="text-muted text-underline mx-2">Status <hr></a>
+                            <span class="text-muted mx-1">|</span>
+                            <a href="#" class="text-muted text-underline mx-2">Data <hr></a>
+        
+                        </div>
                     </div>
                 </div>
-            </div>
-    
-    </footer>
+        
+        </footer>
     <!-- [ Main Content ] end -->
     </div>
 </div>

@@ -144,9 +144,6 @@ class GeneralUpdatesController extends Controller
             $shipment["barcode"] = (new DNS1D())->getBarcodePNG("009898", 'C39+',3,33);
             // $shipment["barcode"] = (new DNS1D())->getBarcodePNG($shipment["tracking_no"], 'C39+',3,33);
         }
-        return response()->json([
-            "status" => "success",
-            "data" => $shipment
-        ]);
+        return view("customerShipmentTracking.tracking-details", compact("shipment"));
     }
 }
