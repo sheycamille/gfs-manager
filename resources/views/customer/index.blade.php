@@ -33,10 +33,11 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
         <a href="{{route('customer.export')}}" data-bs-toggle="tooltip" title="{{__('Export')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-file-export"></i>
         </a>
-
+        @can('create customer', $user)
         <a href="#" data-size="lg" data-url="{{ route('customer.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create')}}" data-title="{{__('Create Customer')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-plus"></i>
         </a>
+        @endcan
     </div>
 @endsection
 

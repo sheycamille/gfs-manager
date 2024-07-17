@@ -256,6 +256,7 @@ Route::group(
             'auth',
             'XSS',
             'revalidate',
+            'manage company settings',
         ],
     ], function () {
         Route::resource('systems', SystemController::class);
@@ -294,7 +295,7 @@ Route::group(
     }
 );
 
-Route::get('productservice/index', [ProductServiceController::class, 'index'])->name('productservice.index');
+Route::get('productservice/index', [ProductServiceController::class, 'index'])->name('productservice.index')->middleware(['auth', 'XSS', 'manage product & service']);
 Route::get('productservice/{id}/detail', [ProductServiceController::class, 'warehouseDetail'])->name('productservice.detail')->middleware(['auth', 'XSS']);
 Route::post('empty-cart', [ProductServiceController::class, 'emptyCart'])->middleware(['auth', 'XSS']);
 Route::post('warehouse-empty-cart', [ProductServiceController::class, 'warehouseemptyCart'])->name('warehouse-empty-cart')->middleware(['auth', 'XSS']);

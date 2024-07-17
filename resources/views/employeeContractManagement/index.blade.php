@@ -10,11 +10,12 @@
 @endsection
 @section('action-btn')
     <div class="float-end">
-        @if(\Auth::user()->type == 'company')
+        @can("create contract")
             <a href="{{ route('employees.contract.create') }}" class="btn btn-sm btn-primary">
                 <i class="ti ti-plus"></i>
             </a>
-        @endif
+        @endcan
+
     </div>
 @endsection
 

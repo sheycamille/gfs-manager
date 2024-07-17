@@ -19,9 +19,11 @@
         <a href="{{ route('support.grid') }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="{{__('Grid View')}}">
             <i class="ti ti-layout-grid text-white"></i>
         </a>
+        @can("create support")
         <a href="#" data-size="lg" data-url="{{ route('support.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create')}}" data-title="{{__('Create Support')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-plus"></i>
         </a>
+        @endcan
     </div>
 @endsection
 
@@ -197,11 +199,13 @@
                                     <td>{{\Auth::user()->dateFormat($support->created_at)}}</td>
                                     <td class="Action">
                                     <span>
+                                        @can('reply support')
                                         <div class="action-btn bg-warning ms-2">
                                             <a href="{{ route('support.reply',\Crypt::encrypt($support->id)) }}" data-title="{{__('Support Reply')}}" class="mx-3 btn btn-sm align-items-center" data-bs-toggle="tooltip" title="{{__('Reply')}}" data-original-title="{{__('Reply')}}">
                                                 <i class="ti ti-corner-up-left text-white"></i>
                                             </a>
                                         </div>
+                                        @endcan
                                         @if(\Auth::user()->type=='company' || \Auth::user()->id==$support->ticket_created)
                                             <div class="action-btn bg-primary ms-2">
                                                 <a href="#" data-size="lg" data-url="{{ route('support.edit',$support->id) }}" data-ajax-popup="true" data-title="{{__('Edit Support')}}" class="mx-3 btn btn-sm align-items-center" data-bs-toggle="tooltip" title="{{__('Edit')}}" data-original-title="{{__('Edit')}}">

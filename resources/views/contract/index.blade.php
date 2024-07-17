@@ -13,11 +13,12 @@
         <a href="{{ route('contract.grid') }}"  data-bs-toggle="tooltip" title="{{__('Grid View')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-layout-grid"></i>
         </a>
-        @if(\Auth::user()->type == 'company')
+        @can('create contract')
             <a href="#" data-size="md" data-url="{{ route('contract.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Contract')}}" class="btn btn-sm btn-primary">
                 <i class="ti ti-plus"></i>
             </a>
-        @endif
+        @endcan
+
     </div>
 @endsection
 
@@ -62,9 +63,6 @@
                                     <td>{{ \Auth::user()->priceFormat($contract->value) }}</td>
                                     <td>{{  \Auth::user()->dateFormat($contract->start_date )}}</td>
                                     <td>{{  \Auth::user()->dateFormat($contract->end_date )}}</td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        <a href="#" class="action-item" data-url="{{ route('contract.description',$contract->id) }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Desciption')}}" data-title="{{__('Desciption')}}"><i class="fa fa-comment"></i></a>--}}
-                                    {{--                                    </td>--}}
 
                                     <td class="action ">
                                         @if(\Auth::user()->type=='company')

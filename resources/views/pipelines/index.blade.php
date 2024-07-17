@@ -10,9 +10,11 @@
 @endsection
 @section('action-btn')
     <div class="float-end">
-        <a href="#" data-size="md" data-url="{{ route('pipelines.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Pipeline')}}" class="btn btn-sm btn-primary">
-            <i class="ti ti-plus"></i>
-        </a>
+        @can("create pipeline")
+            <a href="#" data-size="md" data-url="{{ route('pipelines.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Pipeline')}}" class="btn btn-sm btn-primary">
+                <i class="ti ti-plus"></i>
+            </a>
+        @endcan
     </div>
 @endsection
 

@@ -27,8 +27,8 @@
 
 @section('action-btn')
     <div class="float-end">
-    @can('create goal tracking')
-       <a href="#" data-size="lg" data-url="{{ route('goaltracking.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create')}}" data-title="{{__('Create New Goal Tracking')}}" class="btn btn-sm btn-primary">
+        @can('create goal tracking')
+        <a href="#" data-size="lg" data-url="{{ route('goaltracking.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create')}}" data-title="{{__('Create New Goal Tracking')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-plus"></i>
         </a>
         @endcan

@@ -14,9 +14,11 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
 @endsection
 @section('action-btn')
     <div class="float-end">
-        <a href="#" data-size="md" data-url="{{ route('clients.create') }}" data-ajax-popup="true"  data-bs-toggle="tooltip" title="{{__('Create')}}"  class="btn btn-sm btn-primary">
-            <i class="ti ti-plus"></i>
-        </a>
+        @can("create client")
+            <a href="#" data-size="md" data-url="{{ route('clients.create') }}" data-ajax-popup="true"  data-bs-toggle="tooltip" title="{{__('Create')}}"  class="btn btn-sm btn-primary">
+                <i class="ti ti-plus"></i>
+            </a>
+        @endcan
     </div>
 @endsection
 @section('content')
@@ -37,11 +39,6 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
                                         </button>
 
                                         <div class="dropdown-menu dropdown-menu-end">
-{{--                                            <a href="{{ route('clients.show',$client->id) }}"  class="dropdown-item" data-bs-original-title="{{__('View')}}">--}}
-{{--                                                <i class="ti ti-eye"></i>--}}
-{{--                                                <span>{{__('Show')}}</span>--}}
-{{--                                            </a>--}}
-
                                             @can('edit client')
                                                 <a href="#!" data-size="md" data-url="{{ route('clients.edit',$client->id) }}" data-ajax-popup="true" class="dropdown-item" data-bs-original-title="{{__('Edit User')}}">
                                                     <i class="ti ti-pencil"></i>
@@ -58,11 +55,12 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
 
                                                 {!! Form::close() !!}
                                             @endcan
-
-                                            <a href="#!" data-url="{{route('clients.reset',\Crypt::encrypt($client->id))}}" data-ajax-popup="true" class="dropdown-item" data-bs-original-title="{{__('Reset Password')}}">
-                                                <i class="ti ti-adjustments"></i>
-                                                <span>  {{__('Reset Password')}}</span>
-                                            </a>
+                                            @can('reset client password')
+                                                <a href="#!" data-url="{{route('clients.reset',\Crypt::encrypt($client->id))}}" data-ajax-popup="true" class="dropdown-item" data-bs-original-title="{{__('Reset Password')}}">
+                                                    <i class="ti ti-adjustments"></i>
+                                                    <span>  {{__('Reset Password')}}</span>
+                                                </a>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

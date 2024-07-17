@@ -15,11 +15,13 @@
         <a href="{{route('employee.export')}}" data-bs-toggle="tooltip" title="{{__('Export')}}" class="btn btn-sm btn-primary">
             <i class="ti ti-file-export"></i>
         </a>
-        <a href="{{ route('employee.create') }}"
-            data-title="{{ __('Create New Employee') }}" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
-            data-bs-original-title="{{ __('Create') }}">
-            <i class="ti ti-plus"></i>
-        </a>
+        @can('create employee')
+            <a href="{{ route('employee.create') }}"
+                data-title="{{ __('Create New Employee') }}" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
+                data-bs-original-title="{{ __('Create') }}">
+                <i class="ti ti-plus"></i>
+            </a>    
+        @endcan
     </div>
 @endsection
 

@@ -37,9 +37,11 @@
                                     <td>{{  !empty($employee->get_net_salary()) ?\Auth::user()->priceFormat($employee->get_net_salary()):'' }}</td>
                                     <td>
                                     <div class="action-btn bg-success ms-2">
+                                        @can("create set salary")
                                         <a href="{{route('setsalary.show',$employee->id)}}" class="mx-3 btn btn-sm align-items-center" data-bs-toggle="tooltip" title="{{__('Set Salary')}}" data-original-title="{{__('View')}}">
                                             <i class="ti ti-eye text-white"></i>
                                         </a>
+                                        @endcan
                                     </div>
                                     </td>
                                 </tr>
