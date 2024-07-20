@@ -188,7 +188,7 @@
     </script>
 @endpush
 @section('content')
-    <div class="container card" style="border-radius: 0">
+    <div class="container card" style="border-radius: 0" id="dashboard-greetings">
         <div class="d-flex justify-content-between card-body pt-2 pb-0">
             <div class="">
                 <h2>{{__('Hi, ')}}{{\Auth::user()->name }} ! </h2>

@@ -19,7 +19,9 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\BugStatusController;
+use App\Http\Controllers\AppIntegrationController;
 use App\Http\Controllers\BussinessDevelopmentCOntroller;
+use App\Http\Controllers\HelpController;
 use App\Http\Controllers\CashfreeController;
 use App\Http\Controllers\ChartOfAccountController;
 use App\Http\Controllers\ClientController;
@@ -1687,6 +1689,14 @@ Route::controller(LegalManagementController::class)->group(function () {
     //     Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
     // });
     
+});
+
+Route::controller(HelpController::class)->prefix("help")->group(function () {
+    Route::get("/","index")->name("help.index");
+});
+
+Route::controller(AppIntegrationController::class)->prefix("app-integration")->group(function () {
+    Route::get("/","index")->name("app.integration.index");
 });
 
 
