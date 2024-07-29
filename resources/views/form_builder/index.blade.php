@@ -35,9 +35,11 @@
 @endsection
 @section('action-btn')
     <div class="float-end">
-        <a href="#" data-size="md" data-url="{{ route('form_builder.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Form')}}" class="btn btn-sm btn-primary">
-            <i class="ti ti-plus"></i>
-        </a>
+        @can("create form builder")
+            <a href="#" data-size="md" data-url="{{ route('form_builder.create') }}" data-ajax-popup="true" data-bs-toggle="tooltip" title="{{__('Create New Form')}}" class="btn btn-sm btn-primary">
+                <i class="ti ti-plus"></i>
+            </a>
+        @endcan
     </div>
 @endsection
 

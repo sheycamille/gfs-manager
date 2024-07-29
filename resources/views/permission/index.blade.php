@@ -15,9 +15,11 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between w-100">
                         <h4>{{__('Manage Permissions')}}</h4>
-                        <a href="#" data-url="{{ route('permissions.create') }}" data-size="lg" data-ajax-popup="true" data-title="{{__('Create New Permission')}}" class="btn btn-icon icon-left btn-primary">
-                            <i class="fa fa-plus"></i> {{__('Create')}}
-                        </a>
+                        @can('create permission')
+                            <a href="#" data-url="{{ route('permissions.create') }}" data-size="lg" data-ajax-popup="true" data-title="{{__('Create New Permission')}}" class="btn btn-icon icon-left btn-primary">
+                                <i class="fa fa-plus"></i> {{__('Create')}}
+                            </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">

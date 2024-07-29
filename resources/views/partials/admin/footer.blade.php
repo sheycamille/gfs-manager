@@ -51,7 +51,47 @@
 @stack('script-page')
 
 <script>
+    
+    function startTime() {
+        console.log("yooo");
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML =  h + ":" + m + ":" + s;
+        setTimeout(startTime, 1000);
+    }
+    setTimeout(startTime, 1000);
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
 
+    document.getElementById("body").addEventListener("load",(e) => startTime() )
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "295px";
+        document.getElementById("main-component").style.marginLeft = null;
+        document.getElementById("app-content").style.marginLeft = "255px";
+        document.getElementById("header").style.maxWidth = "100%";
+        document.getElementById("closenav").classList.remove("d-none");
+        document.getElementById("opennav").classList.add("d-none");
+        if (document.getElementById("dashboard-greetings") != null ) {
+            document.getElementById("dashboard-greetings").classList.add("container");
+        }
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main-component").style.marginLeft= "-295px";
+        document.getElementById("header").style.maxWidth= "100%";
+        document.getElementById("closenav").classList.add("d-none");
+        document.getElementById("opennav").classList.remove("d-none");
+        if (document.getElementById("dashboard-greetings") != null ) {
+            document.getElementById("dashboard-greetings").classList.remove("container");
+        }
+    }
     feather.replace();
     var pctoggle = document.querySelector("#pct-toggler");
     if (pctoggle) {
@@ -126,4 +166,3 @@
         }
     }
 </script>
-

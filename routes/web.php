@@ -19,7 +19,9 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\BugStatusController;
+use App\Http\Controllers\AppIntegrationController;
 use App\Http\Controllers\BussinessDevelopmentCOntroller;
+use App\Http\Controllers\HelpController;
 use App\Http\Controllers\CashfreeController;
 use App\Http\Controllers\ChartOfAccountController;
 use App\Http\Controllers\ClientController;
@@ -192,6 +194,7 @@ Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVe
 Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
 Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth','throttle:5,30']);
 Route::get("/tracking",[GeneralUpdatesController::class, "tracking"])->name("customer.tracking.page");
+Route::post("/tracking",[GeneralUpdatesController::class, "trackShipment"])->name("customer.tracking.search");
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
 // Route::get('/password/resets/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('change.langPass');
@@ -255,6 +258,7 @@ Route::group(
             'auth',
             'XSS',
             'revalidate',
+            'manage company settings',
         ],
     ], function () {
         Route::resource('systems', SystemController::class);
@@ -293,7 +297,7 @@ Route::group(
     }
 );
 
-Route::get('productservice/index', [ProductServiceController::class, 'index'])->name('productservice.index');
+Route::get('productservice/index', [ProductServiceController::class, 'index'])->name('productservice.index')->middleware(['auth', 'XSS', 'manage product & service']);
 Route::get('productservice/{id}/detail', [ProductServiceController::class, 'warehouseDetail'])->name('productservice.detail')->middleware(['auth', 'XSS']);
 Route::post('empty-cart', [ProductServiceController::class, 'emptyCart'])->middleware(['auth', 'XSS']);
 Route::post('warehouse-empty-cart', [ProductServiceController::class, 'warehouseemptyCart'])->name('warehouse-empty-cart')->middleware(['auth', 'XSS']);
@@ -1685,6 +1689,14 @@ Route::controller(LegalManagementController::class)->group(function () {
     //     Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
     // });
     
+});
+
+Route::controller(HelpController::class)->prefix("help")->group(function () {
+    Route::get("/","index")->name("help.index");
+});
+
+Route::controller(AppIntegrationController::class)->prefix("app-integration")->group(function () {
+    Route::get("/","index")->name("app.integration.index");
 });
 
 
