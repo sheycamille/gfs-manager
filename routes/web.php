@@ -167,7 +167,7 @@ use hisorange\BrowserDetect\Parser as Browser;
 
 
 Route::get('/test', function (Request $request) {
-    
+
     return "View";
 });
 
@@ -192,9 +192,9 @@ Route::get('/register', function () {
 Route::get('/login/{lang?}', [GeneralUpdatesController::class, 'login'])->name('login')->middleware(['guest']);
 Route::get('/otp-verification/{lang?}', [GeneralUpdatesController::class, 'otpVerification'])->name('otp-verification')->middleware('auth');
 Route::post('/verify-otp', [GeneralUpdatesController::class, 'verify_otp'])->name('verify-otp')->middleware('auth');
-Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth','throttle:5,30']);
-Route::get("/tracking",[GeneralUpdatesController::class, "tracking"])->name("customer.tracking.page");
-Route::post("/tracking",[GeneralUpdatesController::class, "trackShipment"])->name("customer.tracking.search");
+Route::get('/resend-otp', [GeneralUpdatesController::class, 'resend_otp'])->name('resend-otp')->middleware(['auth', 'throttle:5,30']);
+Route::get("/tracking", [GeneralUpdatesController::class, "tracking"])->name("customer.tracking.page");
+Route::post("/tracking", [GeneralUpdatesController::class, "trackShipment"])->name("customer.tracking.search");
 // Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
 // Route::get('/password/resets/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('change.langPass');
@@ -237,7 +237,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('change-language/{lang}', [LanguageController::class, 'changeLanquage'])->name('change.language');
 
         Route::get('manage-language/{lang}', [LanguageController::class, 'manageLanguage'])->name('manage.language');
@@ -249,7 +250,6 @@ Route::group(
         Route::any('store-language', [LanguageController::class, 'storeLanguage'])->name('store.language');
 
         Route::delete('/lang/{lang}', [LanguageController::class, 'destroyLang'])->name('lang.destroy');
-
     }
 );
 Route::group(
@@ -260,7 +260,8 @@ Route::group(
             'revalidate',
             'manage company settings',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('systems', SystemController::class);
         Route::post('email-settings', [SystemController::class, 'saveEmailSettings'])->name('email.settings');
         Route::post('company-settings', [SystemController::class, 'saveCompanySettings'])->name('company.settings');
@@ -293,7 +294,6 @@ Route::group(
         Route::post('cookie-setting', [SystemController::class, 'saveCookieSettings'])->name('cookie.setting');
 
         Route::post('cache-settings', [SystemController::class, 'cacheSettingStore'])->name('cache.settings.store')->middleware(['auth', 'XSS']);
-
     }
 );
 
@@ -313,12 +313,12 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('customer/{id}/show', [CustomerController::class, 'show'])->name('customer.show');
         Route::resource('customer', CustomerController::class);
         //customer rating
         Route::get('customers/rating', [CustomerController::class, 'customerRating'])->name('customer.rating');
-
     }
 );
 Route::group(
@@ -328,7 +328,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('vender/{id}/show', [VenderController::class, 'show'])->name('vender.show');
         Route::resource('vender', VenderController::class);
     }
@@ -341,7 +342,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('bank-account', BankAccountController::class);
     }
 );
@@ -352,7 +354,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('bank-transfer/index', [BankTransferController::class, 'index'])->name('bank-transfer.index');
         Route::resource('bank-transfer', BankTransferController::class);
     }
@@ -372,7 +375,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('invoice/{id}/duplicate', [InvoiceController::class, 'duplicate'])->name('invoice.duplicate');
         Route::get('invoice/{id}/shipping/print', [InvoiceController::class, 'shippingDisplay'])->name('invoice.shipping.print');
         Route::get('invoice/{id}/payment/reminder', [InvoiceController::class, 'paymentReminder'])->name('invoice.payment.reminder');
@@ -401,7 +405,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('credit-note', [CreditNoteController::class, 'index'])->name('credit.note');
         Route::get('custom-credit-note', [CreditNoteController::class, 'customCreate'])->name('invoice.custom.credit.note');
         Route::post('custom-credit-note', [CreditNoteController::class, 'customStore'])->name('invoice.custom.credit.note');
@@ -421,7 +426,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('debit-note', [DebitNoteController::class, 'index'])->name('debit.note');
         Route::get('custom-debit-note', [DebitNoteController::class, 'customCreate'])->name('bill.custom.debit.note');
         Route::post('custom-debit-note', [DebitNoteController::class, 'customStore'])->name('bill.custom.debit.note');
@@ -454,7 +460,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('bill/{id}/duplicate', [BillController::class, 'duplicate'])->name('bill.duplicate');
         Route::get('bill/{id}/shipping/print', [BillController::class, 'shippingDisplay'])->name('bill.shipping.print');
         Route::get('bill/index', [BillController::class, 'index'])->name('bill.index');
@@ -482,7 +489,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('report/transaction', [TransactionController::class, 'index'])->name('transaction.index');
     }
 );
@@ -494,12 +502,13 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('report/income-summary', [ReportController::class, 'incomeSummary'])->name('report.income.summary');
         Route::get('report/expense-summary', [ReportController::class, 'expenseSummary'])->name('report.expense.summary');
         Route::get('report/income-vs-expense-summary', [ReportController::class, 'incomeVsExpenseSummary'])->name('report.income.vs.expense.summary');
         Route::get('report/tax-summary', [ReportController::class, 'taxSummary'])->name('report.tax.summary');
-//    Route::get('report/profit-loss-summary', [ReportController::class, 'profitLossSummary'])->name('report.profit.loss.summary');
+        //    Route::get('report/profit-loss-summary', [ReportController::class, 'profitLossSummary'])->name('report.profit.loss.summary');
         Route::get('report/invoice-summary', [ReportController::class, 'invoiceSummary'])->name('report.invoice.summary');
         Route::get('report/bill-summary', [ReportController::class, 'billSummary'])->name('report.bill.summary');
         Route::get('report/product-stock-report', [ReportController::class, 'productStock'])->name('report.product.stock.report');
@@ -531,7 +540,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('proposal/{id}/status/change', [ProposalController::class, 'statusChange'])->name('proposal.status.change');
         Route::get('proposal/{id}/convert', [ProposalController::class, 'convert'])->name('proposal.convert');
         Route::get('proposal/{id}/duplicate', [ProposalController::class, 'duplicate'])->name('proposal.duplicate');
@@ -543,7 +553,6 @@ Route::group(
         Route::get('proposal/{id}/resent', [ProposalController::class, 'resent'])->name('proposal.resent');
         Route::resource('proposal', ProposalController::class);
         Route::get('proposal/create/{cid}', [ProposalController::class, 'create'])->name('proposal.create');
-
     }
 );
 
@@ -570,7 +579,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('chart-of-account', ChartOfAccountController::class);
     }
 );
@@ -582,13 +592,13 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
 
         Route::post('journal-entry/account/destroy', [JournalEntryController::class, 'accountDestroy'])->name('journal.account.destroy');
         Route::delete('journal-entry/journal/destroy/{item_id}', [JournalEntryController::class, 'journalDestroy'])->name('journal.destroy');
 
         Route::resource('journal-entry', JournalEntryController::class);
-
     }
 );
 
@@ -854,7 +864,7 @@ Route::get('job/requirement/{code}/{lang}', [JobController::class, 'jobRequireme
 
 Route::get('job/apply/{code}/{lang}', [JobController::class, 'jobApply'])->name('job.apply')->middleware(['XSS']);
 Route::post('job/apply/data/{code}', [JobController::class, 'jobApplyData'])->name('job.apply.data')->middleware(['XSS']);
-Route::get('candidates-job-applications', [JobApplicationController::class, 'candidate'])->name('job.application.candidate')->middleware(['auth','XSS']);
+Route::get('candidates-job-applications', [JobApplicationController::class, 'candidate'])->name('job.application.candidate')->middleware(['auth', 'XSS']);
 
 Route::resource('job-application', JobApplicationController::class)->middleware(['auth', 'XSS']);
 Route::post('job-application/order', [JobApplicationController::class, 'order'])->name('job.application.order')->middleware(['XSS']);
@@ -1043,7 +1053,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('contractType', ContractTypeController::class);
     }
 );
@@ -1068,7 +1079,8 @@ Route::group(
             'auth',
             'XSS',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('projectstages', ProjectstagesController::class);
         Route::post('/projectstages/order', [ProjectstagesController::class, 'order'])->name('projectstages.order')->middleware(['auth', 'XSS']);
         Route::post('projects/bug/kanban/order', [ProjectController::class, 'bugKanbanOrder'])->name('bug.kanban.order');
@@ -1137,7 +1149,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('contract/{id}/description', [ContractController::class, 'description'])->name('contract.description');
         Route::get('contract/grid', [ContractController::class, 'grid'])->name('contract.grid');
         Route::resource('contract', ContractController::class);
@@ -1151,7 +1164,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('emplooyees/contract/{id}/description', [EmployeeContractManagementController::class, 'description'])->name('employee.contract.description');
         Route::get('employees/contract', [EmployeeContractManagementController::class, 'index'])->name("employees.contract.index");
         Route::get('employees/contract/create', [EmployeeContractManagementController::class, 'create'])->name("employees.contract.create");
@@ -1159,7 +1173,7 @@ Route::group(
         Route::post('employees/contract/{id}/update', [EmployeeContractManagementController::class, 'update'])->name("employees.contract.update");
         Route::delete('employees/contract/{id}/destroy', [EmployeeContractManagementController::class, 'destroy'])->name("employees.contract.destroy");
         Route::post('employees/contract/store', [EmployeeContractManagementController::class, 'store'])->name("employees.contract.store");
-        
+
         // employee contract templates
         Route::get('employees/contract/template', [EmployeeContractTemplatesController::class, 'index'])->name("employee.contract.template.index");
         Route::get('employees/contract/template/create', [EmployeeContractTemplatesController::class, 'create'])->name("employee.contract.template.create");
@@ -1295,8 +1309,8 @@ Route::any('/invoice-with-xendit', [XenditPaymentController::class, 'invoicePayW
 Route::any('/invoice-xendit-status', [XenditPaymentController::class, 'getInvociePaymentStatus'])->name('invoice.xendit.status');
 
 Route::post('/invoice-nepalste/payment', [NepalstePaymnetController::class, 'invoicePayWithnepalste'])->name('customer.with.nepalste');
-Route::get('invoice-nepalste/status/',[NepalstePaymnetController::class,'invoiceGetNepalsteStatus'])->name('invoice.nepalste.status');
-Route::get('invoice-nepalste/cancel/',[NepalstePaymnetController::class,'invoiceGetNepalsteCancel'])->name('invoice.nepalste.cancel');
+Route::get('invoice-nepalste/status/', [NepalstePaymnetController::class, 'invoiceGetNepalsteStatus'])->name('invoice.nepalste.status');
+Route::get('invoice-nepalste/cancel/', [NepalstePaymnetController::class, 'invoiceGetNepalsteCancel'])->name('invoice.nepalste.cancel');
 /***********************************************************************************************************************************************/
 
 Route::group(
@@ -1306,12 +1320,12 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('support/{id}/reply', [SupportController::class, 'reply'])->name('support.reply');
         Route::post('support/{id}/reply', [SupportController::class, 'replyAnswer'])->name('support.reply.answer');
         Route::get('support/grid', [SupportController::class, 'grid'])->name('support.grid');
         Route::resource('support', SupportController::class);
-
     }
 );
 Route::resource('competencies', CompetenciesController::class)->middleware(['auth', 'XSS']);
@@ -1323,7 +1337,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::resource('performanceType', PerformanceTypeController::class);
     }
 );
@@ -1411,11 +1426,12 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('purchase/items', [PurchaseController::class, 'items'])->name('purchase.items');
         Route::resource('purchase', PurchaseController::class);
 
-//    Route::get('/bill/{id}/', 'PurchaseController@purchaseLink')->name('purchase.link.copy');
+        //    Route::get('/bill/{id}/', 'PurchaseController@purchaseLink')->name('purchase.link.copy');
         Route::get('purchase/{id}/payment', [PurchaseController::class, 'payment'])->name('purchase.payment');
         Route::post('purchase/{id}/payment', [PurchaseController::class, 'createPayment'])->name('purchase.payment');
         Route::post('purchase/{id}/payment/{pid}/destroy', [PurchaseController::class, 'paymentDestroy'])->name('purchase.payment.destroy');
@@ -1425,7 +1441,6 @@ Route::group(
         Route::get('purchase/create/{cid}', [PurchaseController::class, 'create'])->name('purchase.create');
         Route::get('purchase/{id}/sent', [PurchaseController::class, 'sent'])->name('purchase.sent');
         Route::get('purchase/{id}/resent', [PurchaseController::class, 'resent'])->name('purchase.resent');
-
     }
 
 );
@@ -1586,7 +1601,8 @@ Route::group(
             'XSS',
             'revalidate',
         ],
-    ], function () {
+    ],
+    function () {
         Route::get('expense/index', [ExpenseController::class, 'index'])->name('expense.index');
         Route::any('expense/customer', [ExpenseController::class, 'customer'])->name('expense.customer');
         Route::post('expense/vender', [ExpenseController::class, 'vender'])->name('expense.vender');
@@ -1600,7 +1616,6 @@ Route::group(
 
         Route::resource('expense', ExpenseController::class);
         Route::get('expense/create/{cid}', [ExpenseController::class, 'create'])->name('expense.create');
-
     }
 );
 
@@ -1636,48 +1651,46 @@ Route::get('category/create', [MarketingManagementcontroller::class, 'createCate
 // employee documents management
 Route::controller(EmployeeDocumentController::class)->group(function () {
     Route::prefix("employee-documents")->group(function () {
-        Route::get("/","index")->name("employee-documents.index");
+        Route::get("/", "index")->name("employee-documents.index");
         // Route::get("/{id}","show")->name("employee-documents.show");
-        Route::get("/{id}/edit","edit")->name("employee-documents.edit");
-        Route::post("/{id}/update","update")->name("employee-documents.update");
-        Route::post("/store","store")->name("employee-documents.store");
-        Route::get("/create","create")->name("employee-documents.create");
-        Route::delete("/{id}/destroy","destroy")->name("employee-documents.destroy");
+        Route::get("/{id}/edit", "edit")->name("employee-documents.edit");
+        Route::post("/{id}/update", "update")->name("employee-documents.update");
+        Route::post("/store", "store")->name("employee-documents.store");
+        Route::get("/create", "create")->name("employee-documents.create");
+        Route::delete("/{id}/destroy", "destroy")->name("employee-documents.destroy");
     });
     Route::prefix("employee-document-types")->group(function () {
-        Route::get("/","employeeDocumentTypes")->name("employee-document-types.index");
+        Route::get("/", "employeeDocumentTypes")->name("employee-document-types.index");
         // Route::get("/{id}","show")->name("employee-documents.show");
-        Route::get("/{id}/edit","employeeDocumentTypeEdit")->name("employee-document-types.edit");
-        Route::post("/{id}/update","employeeDocumentTypeUpdate")->name("employee-document-types.update");
-        Route::post("/store","employeeDocumentTypeStore")->name("employee-document-types.store");
-        Route::get("/create","employeeDocumentTypeCreate")->name("employee-document-types.create");
-        Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
+        Route::get("/{id}/edit", "employeeDocumentTypeEdit")->name("employee-document-types.edit");
+        Route::post("/{id}/update", "employeeDocumentTypeUpdate")->name("employee-document-types.update");
+        Route::post("/store", "employeeDocumentTypeStore")->name("employee-document-types.store");
+        Route::get("/create", "employeeDocumentTypeCreate")->name("employee-document-types.create");
+        Route::delete("/{id}/destroy", "employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
     });
-    
 });
 
 // disputes
 Route::controller(LegalManagementController::class)->group(function () {
     Route::prefix("legal-disputes")->group(function () {
-        Route::get("/","disputes")->name("disputes.index");
+        Route::get("/", "disputes")->name("disputes.index");
         // Route::get("/{id}","show")->name("employee-documents.show");
-        Route::get("/{id}/edit","editDispute")->name("disputes.edit");
-        Route::post("/{id}/update","updateDispute")->name("disputes.update");
-        Route::post("/store","storeDispute")->name("disputes.store");
-        Route::get("/create","createDispute")->name("disputes.create");
-        Route::delete("/{id}/destroyDispute","destroy")->name("disputes.destroy");
+        Route::get("/{id}/edit", "editDispute")->name("disputes.edit");
+        Route::post("/{id}/update", "updateDispute")->name("disputes.update");
+        Route::post("/store", "storeDispute")->name("disputes.store");
+        Route::get("/create", "createDispute")->name("disputes.create");
+        Route::delete("/{id}/destroyDispute", "destroy")->name("disputes.destroy");
 
         // resources
-        Route::get("/{id}/resource/create","createDisputeResource")->name("disputes.resource.create");
-        Route::get("/{id}/procedure/create","createDisputeProcedure")->name("disputes.procedure.create");
-        Route::get("/{id}/handler/create","createDisputeHandler")->name("disputes.handler.create");
-        Route::get("/{id}/consultants/create","createDisputeConsultant")->name("disputes.consultants.create");
+        Route::get("/{id}/resource/create", "createDisputeResource")->name("disputes.resource.create");
+        Route::get("/{id}/procedure/create", "createDisputeProcedure")->name("disputes.procedure.create");
+        Route::get("/{id}/handler/create", "createDisputeHandler")->name("disputes.handler.create");
+        Route::get("/{id}/consultants/create", "createDisputeConsultant")->name("disputes.consultants.create");
 
-        Route::post("/{id}/resource/create","storeDisputeResource")->name("disputes.resource.store");
-        Route::post("/{id}/procedure/create","storeDisputeProcedure")->name("disputes.procedure.store");
-        Route::post("/{id}/handler/create","storeDisputeHandler")->name("disputes.handler.store");
-        Route::post("/{id}/consultants/create","storeDisputeConsultant")->name("disputes.consultants.store");
-        
+        Route::post("/{id}/resource/create", "storeDisputeResource")->name("disputes.resource.store");
+        Route::post("/{id}/procedure/create", "storeDisputeProcedure")->name("disputes.procedure.store");
+        Route::post("/{id}/handler/create", "storeDisputeHandler")->name("disputes.handler.store");
+        Route::post("/{id}/consultants/create", "storeDisputeConsultant")->name("disputes.consultants.store");
     });
     // Route::prefix("employee-document-types")->group(function () {
     //     Route::get("/","employeeDocumentTypes")->name("employee-document-types.index");
@@ -1688,15 +1701,13 @@ Route::controller(LegalManagementController::class)->group(function () {
     //     Route::get("/create","employeeDocumentTypeCreate")->name("employee-document-types.create");
     //     Route::delete("/{id}/destroy","employeeDocumentTypeDestroy")->name("employee-document-types.destroy");
     // });
-    
+
 });
 
 Route::controller(HelpController::class)->prefix("help")->group(function () {
-    Route::get("/","index")->name("help.index");
+    Route::get("/", "index")->name("help.index");
 });
 
 Route::controller(AppIntegrationController::class)->prefix("app-integration")->group(function () {
-    Route::get("/","index")->name("app.integration.index");
+    Route::get("/", "index")->name("app.integration.index");
 });
-
-

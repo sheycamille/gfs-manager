@@ -44,4 +44,5 @@
     <input type="button" value="{{__('Cancel')}}" class="btn  btn-light" data-bs-dismiss="modal">
     <input type="submit" value="{{__('Edit')}}" class="btn  btn-primary">
 </div>
-{{ Form::close() }}
+{{ Form::close() }} 
+

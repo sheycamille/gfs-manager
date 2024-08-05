@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       // DB::unprepared(File::get('gfsmanager.sql')); 
+
         $this->call(NotificationSeeder::class);
         Artisan::call('module:migrate LandingPage');
         Artisan::call('module:seed LandingPage');
